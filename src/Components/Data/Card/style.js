@@ -22,7 +22,6 @@ export const Card = styled(Box)(({ borderColor })  => ({
     borderTop: "2px outset",
     textOverflow: "ellipsis",
     marginBottom:20,
-    cursor:"move"
 
 }));
 export const Category = styled(Box)(() => ({

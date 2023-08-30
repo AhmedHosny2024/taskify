@@ -5,54 +5,63 @@ export const todoSlice = createSlice({
       drag:0,
       type:0,
       todo:[{
-        category:"intern",
+        id:"1",
+        category:"1 intern",
         title:"Finish the website",
         disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       },
       {
-      category:"intern",
+        id:"2",
+      category:"2 intern",
       title:"Finish the website",
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
       },
       {
-      category:"intern",
+        id:"3",
+      category:"3 intern",
       title:"Finish the website",
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
       }
       ],
       inprogress:[{
-        category:"intern",
+        id:"4",
+        category:"1 intern",
         title:"Finish the website",
         disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       },
       {
-      category:"intern",
+        id:"5",
+      category:"2 intern",
       title:"Finish the website",
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
       },
       {
-      category:"intern",
+        id:"6",
+      category:"3 intern",
       title:"Finish the website",
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
       }
       ],
       done:[{
-        category:"intern",
+        id:"7",
+        category:"1 intern",
         title:"Finish the website",
         disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       },
       {
-      category:"intern",
+        id:"8",
+      category:"2 intern",
       title:"Finish the website",
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
       },
       {
-      category:"intern",
+        id:"9",
+      category:"3 intern",
       title:"Finish the website",
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
@@ -63,41 +72,37 @@ export const todoSlice = createSlice({
     changeDrag: (state,action) => {
         state.drag =action.payload
       },
-    changeType: (state,action) => {
-        state.type =action.payload
-      },
-
     addInTodoIndex: (state,action) => {
-      state.todo =state.todo.splice(state.drag, 0, action.payload)
+      state.todo.splice(action.payload[0], 0, action.payload[1])
     },
     addInTodo: (state,action) => {
         state.todo =state.todo.push(action.payload)
       },
     removeInTodo:(state,action)=>{
-        state.todo=state.todo.splice(action.payload, 1)
+        state.dragEle=state.todo.splice(action.payload, 1)
     },
     addInInProcessIndex: (state,action) => {
-        state.todo =state.todo.splice(state.drag, 0, action.payload)
+        state.inprogress.splice(action.payload[0], 0, action.payload[1])
       },
     addInProcess: (state,action) => {
-        state.todo =state.todo.push(action.payload)
+        state.inprogress =state.inprogress.push(action.payload)
     },
     removeInInProcess:(state,action)=>{
-        state.todo=state.todo.splice(action.payload, 1)
+        state.dragEle=state.inprogress.splice(action.payload, 1)        
     },
     addInDoneIndex: (state,action) => {
-        state.todo =state.todo.splice(state.drag, 0, action.payload)
+        state.done.splice(action.payload[0], 0, action.payload[1])
       },
     addInDone: (state,action) => {
-        state.todo =state.todo.push(action.payload)
+        state.done =state.done.push(action.payload)
         },
     removeInDone:(state,action)=>{
-        state.todo=state.todo.splice(action.payload, 1)
+        state.dragEle=state.done.splice(action.payload, 1)
     },
 },
 })
 
 // Action creators are generated for each case reducer function
-export const { changeType,changeDrag,addInTodoIndex,addInTodo,removeInTodo,addInInProcessIndex,addInProcess,removeInInProcess,addInDoneIndex,addInDone,removeInDone } = todoSlice.actions
+export const { changeDrag,addInTodoIndex,addInTodo,removeInTodo,addInInProcessIndex,addInProcess,removeInInProcess,addInDoneIndex,addInDone,removeInDone } = todoSlice.actions
 
 export default todoSlice.reducer
