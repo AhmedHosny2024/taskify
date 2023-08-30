@@ -6,6 +6,7 @@ export const SubHeader = styled(ListSubheader)(() => ({
     color: 'black',
     display:"flex",
     marginBottom:-10,
+    position: "inherit",
   }));
 
 export const ALLList = styled(List)(() => ({
