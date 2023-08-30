@@ -4,7 +4,7 @@ export const drowerSlice = createSlice({
   name: 'drower',
   initialState: {
     drower: false,
-    selected:[0,0]
+    selected:[0,0],
   },
   reducers: {
     changeDrower: (state) => {

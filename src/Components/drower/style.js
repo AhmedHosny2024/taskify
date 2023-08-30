@@ -33,7 +33,7 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
     "& .MuiPaper-root":{
-        zIndex:-1,
+        // zIndex:1,
         top:75,
     },
     ...(open && {

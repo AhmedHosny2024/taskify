@@ -7,9 +7,14 @@
 // const store=createStore(Reducer,enhancer())
 import drowerSlice from './drowerSlice';
 import { configureStore } from '@reduxjs/toolkit';
+import filterSlice from './filterSlice';
+import todoSlice from './todoSlice';
 const store =configureStore({
     reducer:{
         drower : drowerSlice,
+        filter : filterSlice,
+        todo   : todoSlice
+
     }
 })
 export default store

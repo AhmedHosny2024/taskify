@@ -1,22 +1,27 @@
 import { Button, Space } from 'antd'
-import { Container, SearchBar, Title } from './style'
+import { Container, SearchBar, SecondContainer, Title } from './style'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { IconButton } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFilter } from '../../Redux/filterSlice';
 
 export default function Navigation() {
+    const filter=useSelector(state=>state.filter.filter)
+    const dispatch =useDispatch()
+
 return (
    <Container>
         <Title variant="h6" component="div" >
             Tasks
         </Title>
-        <Container>
+        <SecondContainer>
             <Space style={{marginRight:5 }}>
                     <Button type="primary">New task</Button>
             </Space>
             <SearchBar placeholder="input search text"   />
-            <IconButton>
-                <FilterAltOutlinedIcon />
+            <IconButton onClick={()=>dispatch(changeFilter())}>
+                <FilterAltOutlinedIcon sx={{color:(filter===true) ? "#1890FF":"black"}}/>
             </IconButton>
-        </Container>
+        </SecondContainer>
     </Container>
 )}
