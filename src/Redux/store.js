@@ -9,12 +9,13 @@ import drowerSlice from './drowerSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import filterSlice from './filterSlice';
 import todoSlice from './todoSlice';
+import newtaskSlice  from './newtaskSlice';
 const store =configureStore({
     reducer:{
         drower : drowerSlice,
         filter : filterSlice,
-        todo   : todoSlice
-
+        todo   : todoSlice,
+        newtask : newtaskSlice,
     }
 })
 export default store

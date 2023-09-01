@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconButton } from '@mui/material';
-import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import { Card, Category, CategoryText, Disc, Header, Title } from './style';
 import { DatePicker } from 'antd';
 import { Draggable } from 'react-beautiful-dnd';
+import More from './more/more';
 export default function TodoCard (props) {
     const {data,borderColor,index}=props
     const onChange = (date, dateString) => {
@@ -29,7 +29,7 @@ export default function TodoCard (props) {
                 <CategoryText>{data.category}</CategoryText>
             </Category>
             <IconButton>
-                <MoreHorizRoundedIcon sx={{color:"black"}}/>
+                <More />
             </IconButton>
         </Header>
         <Title>
@@ -38,7 +38,7 @@ export default function TodoCard (props) {
         <Disc>
             {data.disc}
         </Disc>
-        <DatePicker onChange={onChange} />
+        <DatePicker onChange={onChange} disabled/>
         </Card>
         )}
     </Draggable>

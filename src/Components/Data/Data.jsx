@@ -52,9 +52,9 @@ export default function Data () {
     return (
   <DragDropContext onDragEnd={dragEnd}>
   <Container>
-    <ToDo/>
-    <InProgressCard/>
-    <Done/>
+    <ToDo todo={todo}/>
+    <InProgressCard inprogress={inprogress}/>
+    <Done done={done}/>
   </Container>
   </DragDropContext>
 

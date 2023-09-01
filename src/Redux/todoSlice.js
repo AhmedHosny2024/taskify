@@ -4,6 +4,7 @@ export const todoSlice = createSlice({
   initialState: {
       drag:0,
       type:0,
+      lastid:10,
       todo:[{
         id:"1",
         category:"1 intern",
@@ -74,27 +75,35 @@ export const todoSlice = createSlice({
       },
     addInTodoIndex: (state,action) => {
       state.todo.splice(action.payload[0], 0, action.payload[1])
+      state.lastid++
     },
     addInTodo: (state,action) => {
-        state.todo =state.todo.push(action.payload)
+        state.todo.push(action.payload)
+        state.lastid++
+
       },
     removeInTodo:(state,action)=>{
         state.dragEle=state.todo.splice(action.payload, 1)
+
     },
     addInInProcessIndex: (state,action) => {
         state.inprogress.splice(action.payload[0], 0, action.payload[1])
+        state.lastid++
       },
     addInProcess: (state,action) => {
-        state.inprogress =state.inprogress.push(action.payload)
+        state.inprogress.push(action.payload)
+        state.lastid++
     },
     removeInInProcess:(state,action)=>{
         state.dragEle=state.inprogress.splice(action.payload, 1)        
     },
     addInDoneIndex: (state,action) => {
         state.done.splice(action.payload[0], 0, action.payload[1])
+        state.lastid++
       },
     addInDone: (state,action) => {
-        state.done =state.done.push(action.payload)
+        state.done.push(action.payload)
+        state.lastid++
         },
     removeInDone:(state,action)=>{
         state.dragEle=state.done.splice(action.payload, 1)
