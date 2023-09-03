@@ -4,8 +4,9 @@ import { Card, Category, CategoryText, Disc, Header, Title } from './style';
 import { DatePicker } from 'antd';
 import { Draggable } from 'react-beautiful-dnd';
 import More from './more/more';
+import Edit from '../Edit/edit';
 export default function TodoCard (props) {
-    const {data,borderColor,index}=props
+    const {data,borderColor,index,func,remove}=props
     const onChange = (date, dateString) => {
         
         console.log(date, dateString);
@@ -29,7 +30,8 @@ export default function TodoCard (props) {
                 <CategoryText>{data.category}</CategoryText>
             </Category>
             <IconButton>
-                <More />
+                <More index={index} remove={remove} id={data.id}/>
+                <Edit data={data} index={index} func={func}/>
             </IconButton>
         </Header>
         <Title>

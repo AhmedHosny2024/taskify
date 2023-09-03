@@ -5,13 +5,13 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import TodoCard from '../Card/Card';
 import { Droppable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
-import { addInProcess } from '../../../Redux/todoSlice';
+import { UpdateInInprogress, addInProcess, removeInInProcess } from '../../../Redux/todoSlice';
 import NewTask from '../Newtask/newTask';
 import { useDispatch } from 'react-redux';
 import { addnewtaskinprogress } from '../../../Redux/newtaskSlice';
 
 export default function InProgressCard (props) {
-  const {inprogress}=props
+  const {inprogress,borderColor}=props
   const newtask = useSelector(state=>state.newtask.addinprogress)
   const dispatch=useDispatch()
     return (
@@ -22,13 +22,13 @@ export default function InProgressCard (props) {
             <AddRoundedIcon  sx={{color:"black"}}/>
         </IconButton>
     </Header>
-    {newtask && <NewTask add={addInProcess}/>}
+    {newtask && <NewTask add={addInProcess} borderColor={borderColor}/>}
     <Droppable droppableId="2" key="2">
         {(droppableProvided,droppableSnapshout) => (
           <Box ref={droppableProvided.innerRef} 
           {...droppableProvided.droppableProps}>
           {inprogress.map((data,index) =>
-            <TodoCard data={data} borderColor="yellow" index={index} />
+            <TodoCard data={data} borderColor="yellow" index={index} func={UpdateInInprogress} remove={removeInInProcess}/>
           )}  
         
           {droppableProvided.placeholder}

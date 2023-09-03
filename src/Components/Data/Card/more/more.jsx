@@ -5,6 +5,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {
   Select, SelectBox, SelectItem, SelectItemDelete,
 } from './style';
+import { useDispatch } from 'react-redux';
 /**
  * More icon
  * @component
@@ -15,8 +16,8 @@ import {
  * @return {React.Component} - More icon
  */
 export default function More(props) {
-  const {id}=props
-
+  const {id,remove,index}=props
+  const dispatch=useDispatch()
   const [showList1, setShowList1] = useState(false);
 
   // toggle the list when click
@@ -40,8 +41,8 @@ export default function More(props) {
       </Select>
       {showList1 && (
       <SelectBox data-testid="items" >
-        <SelectItem onClick={()=>document.getElementById(id).click()}>Edit</SelectItem>
-        <SelectItemDelete> Delete </SelectItemDelete>
+        <SelectItem onClick={()=>document.getElementById("edit"+id)?.click()}>Edit</SelectItem>
+        <SelectItemDelete onClick={()=>dispatch(remove(index))}> Delete </SelectItemDelete>
       </SelectBox>
       )}
     </>

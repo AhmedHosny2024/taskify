@@ -31,12 +31,12 @@ export const SelectItem = styled(Button)(() => ({
   textTransform: 'none',
   // not working
   '& .MuiButtonBase-root:hover': {
-    color: '#1a1a1b',
-    backgroundColor: '#e9f5fd',
+    backgroundColor: "#1677ff",
+    color: "white",
   },
   '&:hover': {
-    color: '#1a1a1b',
-    backgroundColor: '#e9f5fd',
+    backgroundColor: "#1677ff",
+    color: "white",
   },
 }));
 export const SelectItemDelete = styled(Button)(() => ({

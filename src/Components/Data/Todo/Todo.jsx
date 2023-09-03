@@ -5,14 +5,14 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';import TodoCard from
 import { Droppable } from 'react-beautiful-dnd';
 import NewTask from '../Newtask/newTask';
 import { useSelector } from 'react-redux';
-import { addInTodo } from '../../../Redux/todoSlice';
+import { UpdateInTodo, addInTodo, removeInTodo } from '../../../Redux/todoSlice';
 import { useDispatch } from 'react-redux';
 import { addnewtasktodo } from '../../../Redux/newtaskSlice';
 
 
 
 export default function ToDo (props) {
-  const {todo}=props
+  const {todo,borderColor}=props
   const newtask = useSelector(state=>state.newtask.addtodo)
   const dispatch=useDispatch()
     return (
@@ -23,13 +23,13 @@ export default function ToDo (props) {
               <AddRoundedIcon  sx={{color:"black"}}/>
           </IconButton>
       </Header>
-      {newtask && <NewTask add={addInTodo}/>}
+      {newtask && <NewTask add={addInTodo} borderColor={borderColor}/>}
       <Droppable droppableId="1" key="1">
         {(droppableProvided,droppableSnapshout) => (
           <Box ref={droppableProvided.innerRef} 
           {...droppableProvided.droppableProps}>
           {todo.map((data,index) =>(
-          <TodoCard data={data} borderColor="red" index={index} />
+          <TodoCard data={data} borderColor="red" index={index} func={UpdateInTodo} remove={removeInTodo}/>
           ))}
           {droppableProvided.placeholder}
           </Box>

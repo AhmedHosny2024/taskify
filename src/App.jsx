@@ -2,7 +2,7 @@ import Nav from './Components/nav/nav';
 import './App.css';
 import MiniDrawer from './Components/drower/drower';
 import Navigation from './Components/navigation/navigation';
-import { Container } from './style';
+import { Container, SecondContainer } from './style';
 import Filter from './Components/Filter/filter';
 import { Box, Divider } from '@mui/material';
 import { useSelector } from 'react-redux';
@@ -20,10 +20,10 @@ function App() {
             <Navigation/>
             <Divider/>
           </Box>
-          <Box sx={{width: "100%",display:'flex',flexDirection:'row'}}>
+          <SecondContainer>
             {(filter)&&<Filter/>}
             <Data/>
-          </Box>
+          </SecondContainer>
         </Box>
       </Container>
     </div>

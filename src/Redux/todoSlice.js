@@ -84,7 +84,9 @@ export const todoSlice = createSlice({
       },
     removeInTodo:(state,action)=>{
         state.dragEle=state.todo.splice(action.payload, 1)
-
+    },
+    UpdateInTodo:(state,action)=>{
+      state.todo[action.payload[0]]=action.payload[1]
     },
     addInInProcessIndex: (state,action) => {
         state.inprogress.splice(action.payload[0], 0, action.payload[1])
@@ -97,6 +99,9 @@ export const todoSlice = createSlice({
     removeInInProcess:(state,action)=>{
         state.dragEle=state.inprogress.splice(action.payload, 1)        
     },
+    UpdateInInprogress:(state,action)=>{
+      state.inprogress[action.payload[0]]=action.payload[1]
+    },
     addInDoneIndex: (state,action) => {
         state.done.splice(action.payload[0], 0, action.payload[1])
         state.lastid++
@@ -108,10 +113,16 @@ export const todoSlice = createSlice({
     removeInDone:(state,action)=>{
         state.dragEle=state.done.splice(action.payload, 1)
     },
+    UpdateInDone:(state,action)=>{
+      state.done[action.payload[0]]=action.payload[1]
+    },
 },
 })
 
 // Action creators are generated for each case reducer function
-export const { changeDrag,addInTodoIndex,addInTodo,removeInTodo,addInInProcessIndex,addInProcess,removeInInProcess,addInDoneIndex,addInDone,removeInDone } = todoSlice.actions
+export const { changeDrag,
+  addInTodoIndex,addInTodo,removeInTodo,UpdateInTodo,
+  addInInProcessIndex,addInProcess,removeInInProcess,UpdateInInprogress,
+  addInDoneIndex,addInDone,removeInDone,UpdateInDone } = todoSlice.actions
 
 export default todoSlice.reducer

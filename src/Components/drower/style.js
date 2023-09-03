@@ -28,6 +28,9 @@ const closedMixin = (theme) => ({
 
 export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
+    [theme.breakpoints.between('0', '600')]: {
+      display:'none',
+    },
     [theme.breakpoints.between('800', '900')]: {
       width:"45%",
     },

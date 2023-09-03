@@ -6,9 +6,10 @@ import { Actions, Card, MySelect,SaveBtn,CancelBtn } from './style';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { closeall } from '../../../Redux/newtaskSlice';
+import { DatePicker } from 'antd';
 
 export default function NewTask(props) {
-  const {add}=props
+  const {add,borderColor}=props
   const [disc, setDisc] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
@@ -36,7 +37,7 @@ export default function NewTask(props) {
     setCategory(value)
   };
   return (
-    <Card>
+    <Card borderColor={borderColor}>
       <MySelect
         showSearch
         sx={{fontWeight:700,color:"black"}}
@@ -73,20 +74,23 @@ export default function NewTask(props) {
           >
           <TextField
           required
-        id="standard-search"
-        label="Title"
-        type="search"
-        variant="standard"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-        sx={{my:1}}
+          id="standard-search"
+          label="Title"
+          type="search"
+          variant="standard"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          sx={{my:1}}
           />
+
           <TextArea
           value={disc}
           onChange={(e) => setDisc(e.target.value)}
           placeholder="Discreption"
-          autoSize={{ minRows: 4, maxRows: 8 }}
+          autoSize={{ minRows: 4, maxRows: 8}}
+          style={{marginBottom:8}}
           />
+        <DatePicker/>
         </Box>
       <Actions >
         <SaveBtn border="#1677ff" onClick={Save}>Save</SaveBtn>
