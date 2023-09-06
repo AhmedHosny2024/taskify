@@ -5,7 +5,7 @@ export const filterSlice = createSlice({
   initialState: {
     filter:false,
     filterState:[0,0,0],
-    category:[0,0,0],
+    category:[0,0,0,0],
     staues:[0,0,0],
     dudate:[0,0,0],
   },

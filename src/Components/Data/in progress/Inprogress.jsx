@@ -9,9 +9,10 @@ import { UpdateInInprogress, addInProcess, removeInInProcess } from '../../../Re
 import NewTask from '../Newtask/newTask';
 import { useDispatch } from 'react-redux';
 import { addnewtaskinprogress } from '../../../Redux/newtaskSlice';
+import Loading from '../loading';
 
 export default function InProgressCard (props) {
-  const {inprogress,borderColor}=props
+  const {inprogress,borderColor,inprogressloading,ref}=props
   const newtask = useSelector(state=>state.newtask.addinprogress)
   const dispatch=useDispatch()
     return (
@@ -22,11 +23,21 @@ export default function InProgressCard (props) {
             <AddRoundedIcon  sx={{color:"black"}}/>
         </IconButton>
     </Header>
-    {newtask && <NewTask add={addInProcess} borderColor={borderColor}/>}
-    <Droppable droppableId="2" key="2">
+    {inprogressloading ? <>
+        <Loading/>
+        <Loading/>
+        <Loading/>
+      </> :
+      <>
+    {newtask && <NewTask add={addInProcess} type="1"borderColor={borderColor} ref={ref}/>}
+    <Droppable droppableId="2" key="2" >
         {(droppableProvided,droppableSnapshout) => (
           <Box ref={droppableProvided.innerRef} 
-          {...droppableProvided.droppableProps}>
+          {...droppableProvided.droppableProps}
+          data-testid="inprogress"
+          sx={{height:"100%"}}
+
+          >
           {inprogress.map((data,index) =>
             <TodoCard data={data} borderColor="yellow" index={index} func={UpdateInInprogress} remove={removeInInProcess}/>
           )}  
@@ -36,6 +47,7 @@ export default function InProgressCard (props) {
           </Box>
       )}
       </Droppable>
-    
+      </>
+    }
   </Container>
 )};

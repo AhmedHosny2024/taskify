@@ -10,12 +10,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import filterSlice from './filterSlice';
 import todoSlice from './todoSlice';
 import newtaskSlice  from './newtaskSlice';
+import dataSlice from './dataSlice';
 const store =configureStore({
     reducer:{
         drower : drowerSlice,
         filter : filterSlice,
         todo   : todoSlice,
         newtask : newtaskSlice,
+        data   : dataSlice
     }
 })
 export default store

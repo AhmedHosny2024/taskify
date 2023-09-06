@@ -19,7 +19,7 @@ export default function  Categories () {
 
         return (
             <ALLList component="nav" aria-labelledby="nested-list-subheader" disablePadding>
-            <ItemButton onClick={handleClick} sx={{width:"200px"}}>
+            <ItemButton onClick={handleClick} sx={{width:"200px"}} data-testid="category">
                 <Icon>
                 <CheckSquareOutlined  style={{color: '#1890FF' }}/>
                 </Icon>
@@ -28,17 +28,21 @@ export default function  Categories () {
             </ItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit >
                 <MyList component="div" disablePadding > 
-                <SubItemButton selected={(display[0]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(category(0))}>
+                    <SubItemButton selected={(display[0]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(category(0))} data-testid="intern">
                         <Icon/>
                         <SmallIconText primary="Intern" />
                     </SubItemButton>
                     <SubItemButton selected={(display[1]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(category(1))}>
                         <Icon/>
-                        <SmallIconText primary="Work" />
+                        <SmallIconText primary="Junior" />
                     </SubItemButton>
                     <SubItemButton selected={(display[2]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(category(2))}>
                         <Icon/>
-                        <SmallIconText primary="UX Designer" />
+                        <SmallIconText primary="Senior" />
+                    </SubItemButton>
+                    <SubItemButton selected={(display[3]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(category(3))}>
+                        <Icon/>
+                        <SmallIconText primary="Manager" />
                     </SubItemButton>
                 </MyList>
             </Collapse>

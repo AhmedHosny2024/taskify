@@ -14,7 +14,7 @@ export default function TodoCard (props) {
 
       
     return (
-    <Draggable key={data.id} draggableId={data.id} index={index}>
+    <Draggable key={data.id} draggableId={data.id} index={index} >
         {(draggablePprovided,draggableSnapshot)=>(
         <Card borderColor={borderColor} 
             ref={draggablePprovided.innerRef} 
@@ -24,14 +24,15 @@ export default function TodoCard (props) {
                 
                 ...draggablePprovided.draggableProps.style
             }}
+            data-testid={data.id}
             >
         <Header>
             <Category>
                 <CategoryText>{data.category}</CategoryText>
             </Category>
             <IconButton>
-                <More index={index} remove={remove} id={data.id}/>
-                <Edit data={data} index={index} func={func}/>
+                <More index={index} remove={remove} id={data.id} borderColor={borderColor}data={data}/>
+                <Edit data={data} index={index} func={func} borderColor={borderColor}/>
             </IconButton>
         </Header>
         <Title>

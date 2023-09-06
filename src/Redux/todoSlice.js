@@ -7,7 +7,7 @@ export const todoSlice = createSlice({
       lastid:10,
       todo:[{
         id:"1",
-        category:"1 intern",
+        category:"1 intern ♘",
         title:"Finish the website",
         disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       },

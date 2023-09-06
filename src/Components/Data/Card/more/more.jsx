@@ -6,6 +6,7 @@ import {
   Select, SelectBox, SelectItem, SelectItemDelete,
 } from './style';
 import { useDispatch } from 'react-redux';
+import { removeArrayElement } from '../../../../Firebase/firebase';
 /**
  * More icon
  * @component
@@ -16,10 +17,23 @@ import { useDispatch } from 'react-redux';
  * @return {React.Component} - More icon
  */
 export default function More(props) {
-  const {id,remove,index}=props
-  const dispatch=useDispatch()
+  const {id,data,borderColor}=props
+  // const dispatch=useDispatch()
   const [showList1, setShowList1] = useState(false);
-
+  let field;
+  switch(borderColor){
+    case "red":
+      field="todo"
+      break
+    case "yellow":
+      field="inprogress"
+      break
+    case "green":
+      field="done"
+      break
+    default:
+      field="todo"
+  }
   // toggle the list when click
   const handleClick1 = () => {
     setShowList1((prev) => !prev);
@@ -42,7 +56,7 @@ export default function More(props) {
       {showList1 && (
       <SelectBox data-testid="items" >
         <SelectItem onClick={()=>document.getElementById("edit"+id)?.click()}>Edit</SelectItem>
-        <SelectItemDelete onClick={()=>dispatch(remove(index))}> Delete </SelectItemDelete>
+        <SelectItemDelete onClick={()=>removeArrayElement(field,data)}> Delete </SelectItemDelete>
       </SelectBox>
       )}
     </>

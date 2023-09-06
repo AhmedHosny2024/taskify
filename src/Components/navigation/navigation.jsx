@@ -16,10 +16,10 @@ return (
         </Title>
         <SecondContainer>
             <Space style={{marginRight:5 }}>
-                    <Button type="primary" onClick={()=>dispatch(addnewtasktodo())}>New task</Button>
+                    <Button type="primary" data-testid="newTaskBtn" onClick={()=>dispatch(addnewtasktodo())}>New task</Button>
             </Space>
             <SearchBar placeholder="input search text"   />
-            <IconButton onClick={()=>dispatch(changeFilter())}>
+            <IconButton onClick={()=>dispatch(changeFilter())} data-testid="filterBtn">
                 <FilterAltOutlinedIcon sx={{color:(filter===true) ? "#1890FF":"black"}}/>
             </IconButton>
         </SecondContainer>

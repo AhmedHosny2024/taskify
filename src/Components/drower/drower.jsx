@@ -28,10 +28,10 @@ export default function MiniDrawer() {
   };
   return (
     
-      <Drawer variant="permanent" open={drower} onMouseEnter={handleDrawer} onMouseLeave= {handleDrawer}>
+      <Drawer variant="permanent" data-testid="drower" open={drower} onMouseEnter={handleDrawer} onMouseLeave= {handleDrawer}>
         <List>
             <ListItem key={"Home"} disablePadding sx={{ display: 'block' }} onClick={selectHome}>
-              <Item open={drower} selected={selected[0]}>
+              <Item open={drower} selected={selected[0]} data-testid="mouseEnter">
                 <ItemIcone open ={drower}>
                  <HomeOutlinedIcon sx={{ color: selected[0] ? "#1890FF" : "black" }}/> 
                 </ItemIcone>

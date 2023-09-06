@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux';
 import { UpdateInTodo, addInTodo, removeInTodo } from '../../../Redux/todoSlice';
 import { useDispatch } from 'react-redux';
 import { addnewtasktodo } from '../../../Redux/newtaskSlice';
+import Loading from '../loading';
 
 
 
 export default function ToDo (props) {
-  const {todo,borderColor}=props
+  const {todo,borderColor,todoloading,ref}=props
   const newtask = useSelector(state=>state.newtask.addtodo)
   const dispatch=useDispatch()
     return (
@@ -23,11 +24,20 @@ export default function ToDo (props) {
               <AddRoundedIcon  sx={{color:"black"}}/>
           </IconButton>
       </Header>
-      {newtask && <NewTask add={addInTodo} borderColor={borderColor}/>}
+      {todoloading ? <>
+        <Loading/>
+        <Loading/>
+        <Loading/>
+      </> :
+      <>
+      {newtask && <NewTask add={addInTodo} borderColor={borderColor} ref={ref} type="0"/>}
       <Droppable droppableId="1" key="1">
         {(droppableProvided,droppableSnapshout) => (
           <Box ref={droppableProvided.innerRef} 
-          {...droppableProvided.droppableProps}>
+          {...droppableProvided.droppableProps}
+          data-testid="todo"
+          sx={{height:"100%"}}
+          >
           {todo.map((data,index) =>(
           <TodoCard data={data} borderColor="red" index={index} func={UpdateInTodo} remove={removeInTodo}/>
           ))}
@@ -35,5 +45,8 @@ export default function ToDo (props) {
           </Box>
       )}
       </Droppable>
+      </>
+      }
+      
     </Container>
 )};

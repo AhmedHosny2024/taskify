@@ -3,14 +3,14 @@ import { Button, Modal } from 'antd';
 import { useDispatch } from 'react-redux';
 import { MySelect } from './style';
 import { Box, TextField } from '@mui/material';
-import TextArea from 'antd/es/input/TextArea';
+import { addToArray, removeArrayElement, updateArrayElement } from '../../../Firebase/firebase';
 function Edit(props) {
-    const {data,index,func}=props
+    const {data,index,func,borderColor}=props
     const [disc, setDisc] = React.useState(data.disc);
     const [title, setTitle] = React.useState(data.title);
     const [category, setCategory] = React.useState(data.category);
     const id=data.id
-    const dispatch=useDispatch()
+    // const dispatch=useDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -24,7 +24,24 @@ function Edit(props) {
       title,
       disc
     }
-    dispatch(func([index,newData]))
+    let field;
+    switch(borderColor){
+      case "red":
+        field="todo"
+        break
+      case "yellow":
+        field="inprogress"
+        break
+      case "green":
+        field="done"
+        break
+      default:
+        field="todo"
+    }
+    // removeArrayElement(field,data)
+    // addToArray(field,newData)
+    updateArrayElement (field,data,newData) 
+    // dispatch(func([index,newData]))
     setIsModalOpen(false);
   };
   const handleCancel = () => {
@@ -84,12 +101,15 @@ function Edit(props) {
           value={title}
           sx={{my:1}}
           />
-          <TextArea
+          <TextField
+          id="outlined-multiline-static"
+          label="Discreption"
+          multiline
+          rows={4}
+          placeholder='Discreption'
           value={disc}
           onChange={(e) => setDisc(e.target.value)}
-          placeholder="Discreption"
-          autoSize={{ minRows: 4, maxRows: 8 }}
-          />
+        />
         </Box>
       </Modal>
     </>
