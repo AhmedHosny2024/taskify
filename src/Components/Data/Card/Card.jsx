@@ -7,12 +7,7 @@ import More from './more/more';
 import Edit from '../Edit/edit';
 export default function TodoCard (props) {
     const {data,borderColor,index,func,remove}=props
-    const onChange = (date, dateString) => {
-        
-        console.log(date, dateString);
-      };
-
-      
+    console.log(data.date)  
     return (
     <Draggable key={data.id} draggableId={data.id} index={index} >
         {(draggablePprovided,draggableSnapshot)=>(
@@ -41,7 +36,7 @@ export default function TodoCard (props) {
         <Disc>
             {data.disc}
         </Disc>
-        <DatePicker onChange={onChange} disabled/>
+        <Title disabled>{data.date}</Title> 
         </Card>
         )}
     </Draggable>

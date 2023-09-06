@@ -15,6 +15,10 @@ export default function Data () {
   const ref = db.collection("data");
   const [data,setData] =useState([])
 
+  const [mainTodo,setmainTodo] =useState([])
+  const [mainInprogress,setmainInprogress] =useState([])
+  const [mainDone,setmainDone] =useState([])
+
   const [todo,setTodo] =useState([])
   const [todoloading, setToDoLoading] = useState(true);
 
@@ -34,9 +38,12 @@ export default function Data () {
         fetchedData.push({ id: doc.id, ...doc.data() });
       });
       setData(fetchedData);
+      setmainTodo((fetchedData.map((a) => a.todo)).flat())
       setTodo((fetchedData.map((a) => a.todo)).flat())
+      setmainInprogress(fetchedData.map((a) => a.inprogress).flat())
       setInprogress(fetchedData.map((a) => a.inprogress).flat())
       setDone(fetchedData.map((a) => a.done).flat())
+      setmainDone(fetchedData.map((a) => a.done).flat())
       setToDoLoading(false);
     });
 
@@ -52,14 +59,14 @@ export default function Data () {
 useEffect(()=>{
   if(category.some((element) => element === true))
   {
-  setTodo(checkCategory(todo,category))
-  setInprogress(checkCategory(inprogress,category))
-  setDone(checkCategory(done,category))
+  setTodo(checkCategory(mainTodo,category))
+  setInprogress(checkCategory(mainInprogress,category))
+  setDone(checkCategory(mainDone,category))
   }
   else{
-    setTodo((data.map((a) => a.todo)).flat())
-    setInprogress(data.map((a) => a.inprogress).flat())
-    setDone(data.map((a) => a.done).flat())
+    setTodo(mainTodo)
+    setInprogress(mainInprogress)
+    setDone(mainDone)
     setToDoLoading(false);
   }
 

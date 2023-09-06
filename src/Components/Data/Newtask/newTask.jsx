@@ -6,17 +6,22 @@ import { useDispatch } from 'react-redux';
 import { closeall } from '../../../Redux/newtaskSlice';
 import { DatePicker } from 'antd';
 import {addToArray} from "../../../Firebase/firebase"
+import moment from 'moment';
 const { v4: uuidv4 } = require('uuid');
 
 export default function NewTask(props) {
+  moment.locale('en')
   const {add,borderColor,ref,type}=props
   const [disc, setDisc] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
+  const [date, setDate] = React.useState('');
+
   // const id=useSelector(state=>state.todo.lastid)
   const dispatch=useDispatch()
 
   const Cancel = () => {
+    console.log(date)
     setCategory('')
     setDisc('')
     setTitle('')
@@ -42,9 +47,10 @@ export default function NewTask(props) {
       id,
       category,
       title,
-      disc
+      disc,
+      date
     }
-    if(category!=='' && title!=='')
+    if(category!=='' && title!==''&&date !=='')
     {
       addToArray(field,newValue)
       Cancel()
@@ -53,6 +59,14 @@ export default function NewTask(props) {
   const onChange = (value) => {
     setCategory(value)
   };
+  const handleDateChange = (date, dateString) => {
+    // 'date' is a moment object representing the selected date
+    // 'dateString' is a string in the format 'YYYY-MM-DD'
+    // setDate(moment(date, 'YYYY-MM-DD'));
+    setDate(dateString);
+    console.log(dateString)
+
+  }
   return (
     <Card borderColor={borderColor} data-testid="newTask">
       <MySelect
@@ -71,12 +85,16 @@ export default function NewTask(props) {
             label: 'Intern',
           },
           {
-            value: 'Work',
-            label: 'Work',
+            value: 'Junior',
+            label: 'Junior',
           },
           {
-            value: 'UX Designer',
-            label: 'UX Designer',
+            value: 'Senior',
+            label: 'Senior',
+          },
+          {
+            value: 'Manager',
+            label: 'Manager',
           },
         ]}
       />
@@ -108,7 +126,7 @@ export default function NewTask(props) {
           rows={4}
           sx={{marginBottom:"8"}}
           />
-        <DatePicker/>
+        <DatePicker onChange={handleDateChange}/>
         </Box>
       <Actions >
         <SaveBtn border="#1677ff" onClick={Save}>Save</SaveBtn>

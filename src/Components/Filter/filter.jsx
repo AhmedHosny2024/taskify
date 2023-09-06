@@ -12,7 +12,7 @@ function Filter() {
     </SubHeader>
     <Categories/>
     <DueDate/>
-    <Priority/>
+    {/* <Priority/> */}
 </Conatiner>
     )
 }

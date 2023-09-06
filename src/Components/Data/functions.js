@@ -5,12 +5,23 @@ export function Mysort(a){
 export function checkCategory(a,category){
     let data=[]
     if(category[0])
-    {data.push(a.filter((ele) => (ele.category==="Intern")));}
-    if(category[1])
-    data.push(a.filter((ele) => (ele.category==="Junior")));
-    if(category[2])
-    data.push(a.filter((ele) => (ele.category==="Senior")));
-    if(category[3])
-    data.push(a.filter((ele) => (ele.category==="Manager")));
+    {
+        data.push(a.filter((ele) => (ele.category==="Intern")));
+    }
+
+    if(category[1]){
+        data.push(a.filter((ele) => (ele.category==="Junior")));
+    }
+
+    if(category[2]){
+
+        data.push(a.filter((ele) => (ele.category==="Senior")));
+    }
+
+    if(category[3]){
+        console.log("manager")
+        data.push(a.filter((ele) => (ele.category==="Manager")));
+    }
+
     return data.flat()
 }
