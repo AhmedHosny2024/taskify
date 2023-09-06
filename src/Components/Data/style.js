@@ -14,5 +14,6 @@ export const Container = styled(Box)(({ theme }) => ({
     margin:10,
     display:"flex",
     flexDirextion:"row",
-    width:"inherit"
+    width:"inherit",
+    height:"fit-content"
 }));

@@ -1,6 +1,4 @@
-
-import { initializeApp } from 'firebase/app';
-import { arrayUnion, doc, getFirestore, updateDoc} from 'firebase/firestore/lite';
+import { arrayUnion, doc, updateDoc} from 'firebase/firestore/lite';
 import firebase from 'firebase/compat/app'; // Note the /compat in the import
 import 'firebase/compat/firestore';
 // Follow this pattern to import other Firebase services
@@ -35,7 +33,6 @@ export function updateCurrentUserDocument(field,newValue,overwrite) {
               }
           }
       }
-      console.log(updateData)
       updateDoc(userDocRef, updateData)
           .then(() => {
               console.log('Updated current user in Firestore!')
@@ -67,7 +64,6 @@ export function addNewTaskToCurrentUser(task) {
             })
     }
 export function addToArray (field, elementToAdd)  {
-      console.log(field,elementToAdd)
       // Reference to the specific document
       const docRef = db.collection('data').doc("nZpaeWiJEU9iaHUM8sr4");
   
@@ -85,10 +81,6 @@ export function addToArray (field, elementToAdd)  {
     };
 export function removeArrayElement  (field,oldele)  {
       // Get a reference to the specific document
-      console.log(
-        "feild",field,
-        "old",oldele,
-      )
       const docRef = db.collection('data').doc("nZpaeWiJEU9iaHUM8sr4");
   
       // Update the first array in the document
@@ -133,7 +125,6 @@ export function updateArrayElement (field,oldele,updatedValue) {
         const indexToUpdate = currentArray.findIndex(
           (element) => element.id === oldele.id
         );
-        console.log(indexToUpdate)
 
         if (indexToUpdate !== -1) {
           // Make a copy of the array to avoid mutating the original

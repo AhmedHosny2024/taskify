@@ -11,7 +11,7 @@ const { v4: uuidv4 } = require('uuid');
 
 export default function NewTask(props) {
   moment.locale('en')
-  const {add,borderColor,ref,type}=props
+  const {borderColor,type}=props
   const [disc, setDisc] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
@@ -21,7 +21,6 @@ export default function NewTask(props) {
   const dispatch=useDispatch()
 
   const Cancel = () => {
-    console.log(date)
     setCategory('')
     setDisc('')
     setTitle('')
@@ -64,7 +63,6 @@ export default function NewTask(props) {
     // 'dateString' is a string in the format 'YYYY-MM-DD'
     // setDate(moment(date, 'YYYY-MM-DD'));
     setDate(dateString);
-    console.log(dateString)
 
   }
   return (

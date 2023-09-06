@@ -8,6 +8,8 @@ export const filterSlice = createSlice({
     category:[0,0,0,0],
     staues:[0,0,0],
     dudate:[0,0,0],
+    startDate:null,
+    endDate:null,
   },
   reducers: {
     changeFilter: (state) => {
@@ -26,11 +28,21 @@ export const filterSlice = createSlice({
       },
     changestate: (state,action)=>{
     state.filterState[action.payload]=!state.filterState[action.payload]
+    if(action.payload===1){
+      state.startDate=null
+      state.endDate=null
     }
+    },
+    setStart: (state,action)=>{
+      state.startDate=action.payload
+      },
+    setEnd: (state,action)=>{
+      state.endDate=action.payload
+      },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {changestate, changeFilter, category, staues, dudate } = filterSlice.actions
+export const {changestate, changeFilter, category, staues, dudate ,setStart,setEnd} = filterSlice.actions
 
 export default filterSlice.reducer

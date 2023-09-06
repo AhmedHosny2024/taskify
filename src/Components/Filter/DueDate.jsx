@@ -3,7 +3,8 @@ import { Collapse } from '@mui/material';
 import React from 'react';
 import { ALLList, Icon, IconText, ItemButton, MyList, SmallIconText, SubItemButton } from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { dudate, changestate } from '../../Redux/filterSlice';
+import { dudate, changestate, setStart, setEnd } from '../../Redux/filterSlice';
+import { DatePicker } from 'antd';
 
 export default function  DueDate () {
 
@@ -15,7 +16,12 @@ export default function  DueDate () {
         dispatch(changestate(1))
     };
 
-
+    const startDate=(date, dateString)=>{
+        dispatch(setStart(dateString))
+    }
+    const endDate=(date, dateString)=>{
+        dispatch(setEnd(dateString))
+    }
         return (
             <ALLList component="nav" aria-labelledby="nested-list-subheader" disablePadding>
             <ItemButton onClick={handleClick} sx={{width:"200px"}}>
@@ -27,7 +33,7 @@ export default function  DueDate () {
             </ItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit sx={{width:"250px"}}>
                 <MyList component="div" disablePadding>
-                    <SubItemButton selected={(display[0]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(dudate(0))}>
+                    {/* <SubItemButton selected={(display[0]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(dudate(0))}>
                         <Icon/>
                         <SmallIconText primary="Today" />
                     </SubItemButton>
@@ -38,7 +44,12 @@ export default function  DueDate () {
                     <SubItemButton selected={(display[2]===true).toString()} sx={{ pl: 4 }} onClick={()=>dispatch(dudate(2))}>
                         <Icon/>
                         <SmallIconText primary="Next-Month" />
-                    </SubItemButton>
+                    </SubItemButton> */}
+                    <p></p>
+                    <DatePicker onChange={startDate} placeholder="Start Date"/>
+                    <p>to</p>
+                    <DatePicker onChange={endDate} placeholder="End Date"/>
+
                 </MyList>
             </Collapse>
         </ALLList>

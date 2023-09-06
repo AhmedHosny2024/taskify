@@ -1,13 +1,11 @@
 import React from 'react';
 import { IconButton } from '@mui/material';
 import { Card, Category, CategoryText, Disc, Header, Title } from './style';
-import { DatePicker } from 'antd';
 import { Draggable } from 'react-beautiful-dnd';
 import More from './more/more';
 import Edit from '../Edit/edit';
 export default function TodoCard (props) {
     const {data,borderColor,index,func,remove}=props
-    console.log(data.date)  
     return (
     <Draggable key={data.id} draggableId={data.id} index={index} >
         {(draggablePprovided,draggableSnapshot)=>(

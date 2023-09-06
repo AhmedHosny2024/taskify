@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
-import { useDispatch } from 'react-redux';
 import { MySelect } from './style';
 import { Box, TextField } from '@mui/material';
-import { addToArray, removeArrayElement, updateArrayElement } from '../../../Firebase/firebase';
+import { updateArrayElement } from '../../../Firebase/firebase';
 function Edit(props) {
-    const {data,index,func,borderColor}=props
+    const {data,borderColor}=props
     const [disc, setDisc] = React.useState(data.disc);
     const [title, setTitle] = React.useState(data.title);
     const [category, setCategory] = React.useState(data.category);
     const id=data.id
+    const date=data.date
     // const dispatch=useDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +22,8 @@ function Edit(props) {
       id,
       category,
       title,
-      disc
+      disc,
+      date
     }
     let field;
     switch(borderColor){
@@ -82,12 +83,16 @@ function Edit(props) {
                   label: 'Intern',
                 },
                 {
-                  value: 'Work',
-                  label: 'Work',
+                  value: 'Junior',
+                  label: 'Junior',
                 },
                 {
-                  value: 'UX Designer',
-                  label: 'UX Designer',
+                  value: 'Senior',
+                  label: 'Senior',
+                },
+                {
+                  value: 'Manager',
+                  label: 'Manager',
                 },
               ]}
             />

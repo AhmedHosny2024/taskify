@@ -3,17 +3,17 @@ import ToDo from './Todo/Todo';
 import { Container } from './style';
 import InProgressCard from './in progress/Inprogress';
 import Done from './Done/done';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import {db, removeArrayElement, updateField} from'../../Firebase/firebase'
 import { useSelector } from 'react-redux';
-import { checkCategory } from './functions';
+import { checkCategory, checkall, chekDate } from './functions';
 
 
 export default function Data () {
   const ref = db.collection("data");
-  const [data,setData] =useState([])
+  // const [data,setData] =useState([])
 
   const [mainTodo,setmainTodo] =useState([])
   const [mainInprogress,setmainInprogress] =useState([])
@@ -37,7 +37,7 @@ export default function Data () {
         // Convert each document to an object with data
         fetchedData.push({ id: doc.id, ...doc.data() });
       });
-      setData(fetchedData);
+      // setData(fetchedData);
       setmainTodo((fetchedData.map((a) => a.todo)).flat())
       setTodo((fetchedData.map((a) => a.todo)).flat())
       setmainInprogress(fetchedData.map((a) => a.inprogress).flat())
@@ -56,12 +56,30 @@ export default function Data () {
   // const inprogress=useSelector(state=>state.todo.inprogress)
   // const done=useSelector(state=>state.todo.done)
   const category=useSelector(state=>state.filter.category)
+  const datefilter=useSelector(state=>state.filter.filterState)[1]
+  const start=useSelector(state=>state.filter.startDate)
+  const end=useSelector(state=>state.filter.endDate)
+  
 useEffect(()=>{
-  if(category.some((element) => element === true))
+  let checkf=category.some((element) => element === true)
+  let chechd=(datefilter && (start||end))
+  if(checkf && chechd){
+    setTodo(checkall(mainTodo,category,start,end))
+    setInprogress(checkall(mainInprogress,category,start,end))
+    setDone(checkall(mainDone,category,start,end))
+  }
+  else if(checkf)
   {
-  setTodo(checkCategory(mainTodo,category))
-  setInprogress(checkCategory(mainInprogress,category))
-  setDone(checkCategory(mainDone,category))
+    setTodo(checkCategory(mainTodo,category))
+    setInprogress(checkCategory(mainInprogress,category))
+    setDone(checkCategory(mainDone,category))
+  }
+  
+  else if(chechd){
+    setTodo(chekDate(mainTodo,start,end))
+    setInprogress(chekDate(mainInprogress,start,end))
+    setDone(chekDate(mainDone,start,end))
+
   }
   else{
     setTodo(mainTodo)
@@ -70,7 +88,7 @@ useEffect(()=>{
     setToDoLoading(false);
   }
 
-},[category])
+},[category,datefilter,start,end])
    const dragEnd=async(result)=>{ 
 
     if(!result.destination) return ;

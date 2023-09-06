@@ -20,4 +20,6 @@ export const SecondContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   display:'flex',
   flexDirection:'row', 
+  overflowWrap: "anywhere",
+
 }));

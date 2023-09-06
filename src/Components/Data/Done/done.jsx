@@ -28,7 +28,8 @@ export default function Done (props) {
         <Loading/>
         <Loading/>
         <Loading/>
-      </> :<>
+      </> :
+      <>
       {newtask && <NewTask add={addInDone} borderColor={borderColor} ref={ref} type="2"/>}
       <Droppable droppableId="3" key="3">
         {(droppableProvided,droppableSnapshout) => (
