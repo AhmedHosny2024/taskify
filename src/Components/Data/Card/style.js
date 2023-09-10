@@ -56,7 +56,8 @@ export const Disc = styled(Box)(() => ({
     textOverflow:"ellipsis",
     overflow:"hidden",
     display: "-webkit-box",
-    WebkitLineClamp: 6,
+    WebkitLineClamp: 8,
+    overflowY:"clip",
     WebkitBoxOrient: "vertical",
     margin:"8px 0px 12px 0px",
 

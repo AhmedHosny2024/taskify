@@ -10,6 +10,7 @@ import Data from './Components/Data/Data';
 
 function App() {
   const filter=useSelector(state=>state.filter.filter)
+
   return (
     <div className="App">
       <Nav/>

@@ -27,7 +27,6 @@ export default function ToDo (props) {
       {todoloading ? <>
         <Loading/>
         <Loading/>
-        <Loading/>
       </> :
       <>
       {newtask && <NewTask add={addInTodo} borderColor={borderColor} ref={ref} type="0"/>}

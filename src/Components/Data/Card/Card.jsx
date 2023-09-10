@@ -1,9 +1,10 @@
 import React from 'react';
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { Card, Category, CategoryText, Disc, Header, Title } from './style';
 import { Draggable } from 'react-beautiful-dnd';
 import More from './more/more';
 import Edit from '../Edit/edit';
+import Display from '../dispay/display';
 export default function TodoCard (props) {
     const {data,borderColor,index,func,remove}=props
     return (
@@ -23,10 +24,13 @@ export default function TodoCard (props) {
             <Category>
                 <CategoryText>{data.category}</CategoryText>
             </Category>
-            <IconButton>
-                <More index={index} remove={remove} id={data.id} borderColor={borderColor}data={data}/>
-                <Edit data={data} index={index} func={func} borderColor={borderColor}/>
-            </IconButton>
+            <Box>
+                <Display data={data}/>
+                <IconButton sx={{padding:1}}>
+                    <More index={index} remove={remove} id={data.id} borderColor={borderColor}data={data}/>
+                    <Edit data={data} index={index} func={func} borderColor={borderColor}/>
+                </IconButton>
+            </Box>
         </Header>
         <Title>
             {data.title}

@@ -45,7 +45,7 @@ export function checkall(a,category,start,end){
     {
         data.push(a.filter((ele) => (ele.category==="Intern")));
     }
-
+    
     if(category[1]){
         data.push(a.filter((ele) => (ele.category==="Junior")));
     }
@@ -70,5 +70,11 @@ export function checkall(a,category,start,end){
     let enddate = new Date(end)
        data=(a.filter((ele) => (new Date(ele.date)<=enddate)))
     }
+    return data.flat()
+}
+export function searchByVal(a,val){
+    let data=[]
+    val=val.toLowerCase()
+    data=a.filter((ele)=>(ele.title.toLowerCase().includes(val)||ele.disc.toLowerCase().includes(val)))
     return data.flat()
 }

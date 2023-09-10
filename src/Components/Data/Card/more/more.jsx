@@ -5,8 +5,9 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {
   Select, SelectBox, SelectItem, SelectItemDelete,
 } from './style';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { removeArrayElement } from '../../../../Firebase/firebase';
+import { msg } from '../../../Snakbar';
 /**
  * More icon
  * @component
@@ -56,7 +57,7 @@ export default function More(props) {
       {showList1 && (
       <SelectBox data-testid="items" >
         <SelectItem onClick={()=>document.getElementById("edit"+id)?.click()}>Edit</SelectItem>
-        <SelectItemDelete onClick={()=>removeArrayElement(field,data)}> Delete </SelectItemDelete>
+        <SelectItemDelete onClick={()=>{msg("success","Task deleted");removeArrayElement(field,data)}}> Delete </SelectItemDelete>
       </SelectBox>
       )}
     </>

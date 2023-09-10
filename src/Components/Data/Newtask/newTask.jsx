@@ -7,6 +7,7 @@ import { closeall } from '../../../Redux/newtaskSlice';
 import { DatePicker } from 'antd';
 import {addToArray} from "../../../Firebase/firebase"
 import moment from 'moment';
+import { msg } from '../../Snakbar';
 const { v4: uuidv4 } = require('uuid');
 
 export default function NewTask(props) {
@@ -16,7 +17,7 @@ export default function NewTask(props) {
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [date, setDate] = React.useState('');
-
+// const [snak,setSnak]=react.useState(false)
   // const id=useSelector(state=>state.todo.lastid)
   const dispatch=useDispatch()
 
@@ -51,9 +52,15 @@ export default function NewTask(props) {
     }
     if(category!=='' && title!==''&&date !=='')
     {
+      msg("success","Task added successfuly")
       addToArray(field,newValue)
       Cancel()
-  }
+    }
+    else{
+      if(category===''){msg("error","Please select Category")}
+      else if(title===''){msg("error","Please add title")}
+      else if(date===''){msg("error","Please select date")}
+    }
   };
   const onChange = (value) => {
     setCategory(value)
@@ -117,12 +124,17 @@ export default function NewTask(props) {
           />
 
           <TextField
+          inputProps={{
+            maxlength: 200
+          }}
+          helperText={`${disc.length}/200`}
           value={disc}
           onChange={(e) => setDisc(e.target.value)}
           placeholder="Discreption"
           multiline
-          rows={4}
-          sx={{marginBottom:"8"}}
+          rows={8}
+          maxRows={8}
+          sx={{marginBottom:"8",overflowY:"clip"}}
           />
         <DatePicker onChange={handleDateChange}/>
         </Box>

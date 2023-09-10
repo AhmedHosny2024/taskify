@@ -8,7 +8,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 import {db, removeArrayElement, updateField} from'../../Firebase/firebase'
 import { useSelector } from 'react-redux';
-import { checkCategory, checkall, chekDate } from './functions';
+import { checkCategory, checkall, chekDate, searchByVal, } from './functions';
 
 
 export default function Data () {
@@ -27,6 +27,7 @@ export default function Data () {
   const [done,setDone] =useState([])
 
   useEffect(() => {
+    setToDoLoading(true)
     // Reference to your Firestore collection
     const collectionRef = db.collection('data');
 
@@ -59,10 +60,13 @@ export default function Data () {
   const datefilter=useSelector(state=>state.filter.filterState)[1]
   const start=useSelector(state=>state.filter.startDate)
   const end=useSelector(state=>state.filter.endDate)
+  const searchState=useSelector(state=>state.search.searchState)
+  const searchval=useSelector(state=>state.search.val)
   
 useEffect(()=>{
   let checkf=category.some((element) => element === true)
   let chechd=(datefilter && (start||end))
+
   if(checkf && chechd){
     setTodo(checkall(mainTodo,category,start,end))
     setInprogress(checkall(mainInprogress,category,start,end))
@@ -85,10 +89,15 @@ useEffect(()=>{
     setTodo(mainTodo)
     setInprogress(mainInprogress)
     setDone(mainDone)
-    setToDoLoading(false);
+  }
+  if(searchState){
+    console.log("start")
+    setTodo(searchByVal(todo,searchval))
+    setInprogress(searchByVal(inprogress,searchval))
+    setDone(searchByVal(done,searchval))
   }
 
-},[category,datefilter,start,end])
+},[category,datefilter,start,end,searchState,searchval])
    const dragEnd=async(result)=>{ 
 
     if(!result.destination) return ;

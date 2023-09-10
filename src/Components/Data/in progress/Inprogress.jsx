@@ -26,7 +26,6 @@ export default function InProgressCard (props) {
     {inprogressloading ? <>
         <Loading/>
         <Loading/>
-        <Loading/>
       </> :
       <>
     {newtask && <NewTask add={addInProcess} type="1"borderColor={borderColor} ref={ref}/>}

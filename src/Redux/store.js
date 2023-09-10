@@ -11,13 +11,15 @@ import filterSlice from './filterSlice';
 import todoSlice from './todoSlice';
 import newtaskSlice  from './newtaskSlice';
 import dataSlice from './dataSlice';
+import seacrhSlice from './searchSlice';
 const store =configureStore({
     reducer:{
         drower : drowerSlice,
         filter : filterSlice,
         todo   : todoSlice,
         newtask : newtaskSlice,
-        data   : dataSlice
+        data   : dataSlice,
+        search : seacrhSlice,
     }
 })
 export default store

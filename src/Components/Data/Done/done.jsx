@@ -27,7 +27,6 @@ export default function Done (props) {
       {doneloading ? <>
         <Loading/>
         <Loading/>
-        <Loading/>
       </> :
       <>
       {newtask && <NewTask add={addInDone} borderColor={borderColor} ref={ref} type="2"/>}

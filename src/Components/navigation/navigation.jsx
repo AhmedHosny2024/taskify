@@ -1,15 +1,20 @@
 import { Button, Space } from 'antd'
 import { Container, SearchBar, SecondContainer, Title } from './style'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter } from '../../Redux/filterSlice';
 import { addnewtasktodo } from '../../Redux/newtaskSlice';
-
+import { changeVale, changesearch } from '../../Redux/searchSlice';
 export default function Navigation() {
     const filter=useSelector(state=>state.filter.filter)
     const dispatch =useDispatch()
-return (
+    const onSearch = (value) => {
+        dispatch(changeVale(value))
+        dispatch(changesearch(true))
+    };
+
+    return (
    <Container>
         <Title variant="h6" component="div" >
             Tasks
@@ -18,7 +23,18 @@ return (
             <Space style={{marginRight:5 }}>
                     <Button type="primary" data-testid="newTaskBtn" onClick={()=>dispatch(addnewtasktodo())}>New task</Button>
             </Space>
-            <SearchBar placeholder="input search text"   />
+            <Box >
+                <SearchBar placeholder="Search"
+                allowClear
+                onChange={(e)=>{
+                    if(e.target.value.trim()===""){
+                        dispatch(changesearch(false))
+                        dispatch(changeVale(""))
+                }}} 
+                onSearch={onSearch} 
+                />
+                
+            </Box>
             <IconButton onClick={()=>dispatch(changeFilter())} data-testid="filterBtn">
                 <FilterAltOutlinedIcon sx={{color:(filter===true) ? "#1890FF":"black"}}/>
             </IconButton>

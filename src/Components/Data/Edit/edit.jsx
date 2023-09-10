@@ -3,6 +3,7 @@ import { Button, Modal } from 'antd';
 import { MySelect } from './style';
 import { Box, TextField } from '@mui/material';
 import { updateArrayElement } from '../../../Firebase/firebase';
+import { msg } from '../../Snakbar';
 function Edit(props) {
     const {data,borderColor}=props
     const [disc, setDisc] = React.useState(data.disc);
@@ -39,11 +40,14 @@ function Edit(props) {
       default:
         field="todo"
     }
-    // removeArrayElement(field,data)
-    // addToArray(field,newData)
+
+    if(title===''){msg("error","Please add title")}
+    else if(date===''){msg("error","Please select date")}
+    else{
     updateArrayElement (field,data,newData) 
-    // dispatch(func([index,newData]))
+    msg("success","Task edited")
     setIsModalOpen(false);
+    }
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -107,13 +111,19 @@ function Edit(props) {
           sx={{my:1}}
           />
           <TextField
-          id="outlined-multiline-static"
-          label="Discreption"
-          multiline
-          rows={4}
-          placeholder='Discreption'
+          // label="Discreption"
           value={disc}
+          placeholder='Discreption'
           onChange={(e) => setDisc(e.target.value)}
+          multiline
+          rows={8}
+          maxRows={8}
+          sx={{overflowY:"clip"}}
+          inputProps={{
+            maxlength: 200
+          }}
+          helperText={`${disc.length}/200`}
+
         />
         </Box>
       </Modal>
