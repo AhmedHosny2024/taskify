@@ -53,20 +53,23 @@ export const SelectBox = styled(List)(() => ({
   export const Text = styled("p")(() => ({
     padding:0,
     margin:"0 2px 0 2px",
-    fontSize:"large"
+    fontSize:"large",
   }));
   export const Disc = styled("h6")(() => ({
     padding:0,
     margin:"0 2px 0 6px",
-    fontSize:"small"
+    fontSize:"small",
+    opacity:0.5
+
   }));
   export const Date = styled("p")(() => ({
     padding:0,
     margin:"0 2px 0 6px",
+    opacity:0.5
   }));
   export const SelectItemDelete = styled(Button)(() => ({
     padding: 5,
-    color: '#878a8c',
+    color: 'black',
     fontSize: 14,
     fontWeight: 700,
     width: '100%',
@@ -85,7 +88,7 @@ export const SelectBox = styled(List)(() => ({
   }));
   export const SelectItem = styled(Button)(() => ({
     padding: 5,
-    color: '#878a8c',
+    color: 'black',
     fontSize: 14,
     fontWeight: 700,
     width: '100%',
