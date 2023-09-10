@@ -49,7 +49,7 @@ export default function MiniDrawer() {
               <ItemIcone open ={drower}>
                 <CalendarMonthOutlinedIcon sx={{ color: selected[1] ? "#1890FF" : "black" }}/>
               </ItemIcone>
-              <Text primary={"Attendence"} sx={{ color: selected[1] ? "#1890FF" : "black",opacity: drower?1:0 }}/>
+              <Text primary={"Attendance"} sx={{ color: selected[1] ? "#1890FF" : "black",opacity: drower?1:0 }}/>
             </Item>
           </ListItem>
             <ListItem key={"Users"} disablePadding sx={{ display: 'block' }} onClick={selectUsers}>

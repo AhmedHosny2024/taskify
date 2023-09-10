@@ -8,5 +8,4 @@ export const msg = (type,content) => {
     content,
     duration:1.5,
   });
-  console.log("in msg function")
 };

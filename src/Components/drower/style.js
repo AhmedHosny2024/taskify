@@ -38,6 +38,7 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
+    position: "inherit",
     "& .MuiPaper-root":{
         // zIndex:1,
         top:75,

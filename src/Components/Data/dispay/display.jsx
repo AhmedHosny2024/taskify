@@ -3,11 +3,11 @@ import { Button, Modal } from 'antd';
 import { Box, IconButton, TextField } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 function Display(props) {
-  const {data}=props
+  const {data,display}=props
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    
-    setIsModalOpen(true);
+  const showModal = async() => {
+   await setIsModalOpen(true);
+    console.log("model")
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -15,12 +15,11 @@ function Display(props) {
 
   return (
     <>
-      <IconButton sx={{padding:1,}}>
-              <VisibilityOutlinedIcon type="primary" onClick={showModal} />
+      <IconButton sx={{padding:1,display:{display}}} id={"show"+data.id} onClick={showModal}>
+              <VisibilityOutlinedIcon type="primary"   />
       </IconButton>
       <Modal title={data.title} open={isModalOpen} onOk={handleOk} onCancel={handleOk}
       footer={[
-        
         <Button key="submit" type="primary" onClick={handleOk}>
           OK
         </Button>

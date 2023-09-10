@@ -3,18 +3,19 @@ import ToDo from './Todo/Todo';
 import { Container } from './style';
 import InProgressCard from './in progress/Inprogress';
 import Done from './Done/done';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import {db, removeArrayElement, updateField} from'../../Firebase/firebase'
 import { useSelector } from 'react-redux';
-import { checkCategory, checkall, chekDate, searchByVal, } from './functions';
+import { Today, Yesterday, checkCategory, checkall, chekDate, searchByVal, } from './functions';
+import { SetToday, SetYesterday } from '../../Redux/todoSlice';
 
 
 export default function Data () {
   const ref = db.collection("data");
   // const [data,setData] =useState([])
-
+  const dispatch=useDispatch()
   const [mainTodo,setmainTodo] =useState([])
   const [mainInprogress,setmainInprogress] =useState([])
   const [mainDone,setmainDone] =useState([])
@@ -40,11 +41,16 @@ export default function Data () {
       });
       // setData(fetchedData);
       setmainTodo((fetchedData.map((a) => a.todo)).flat())
+      setmainTodo((fetchedData.map((a) => a.todo)).flat())
       setTodo((fetchedData.map((a) => a.todo)).flat())
       setmainInprogress(fetchedData.map((a) => a.inprogress).flat())
       setInprogress(fetchedData.map((a) => a.inprogress).flat())
       setDone(fetchedData.map((a) => a.done).flat())
       setmainDone(fetchedData.map((a) => a.done).flat())
+      let x=[(fetchedData.map((a) => a.todo)).flat(),(fetchedData.map((a) => a.inprogress)).flat()].flat()
+      console.log(x)
+      dispatch(SetToday(Today(x)))
+      dispatch(SetYesterday(Yesterday(x)))
       setToDoLoading(false);
     });
 

@@ -67,12 +67,20 @@ export const todoSlice = createSlice({
       disc:"According to the brief required, we have a lot of features to implement, so this task should be finished by this week maximum, so we can start another task the next week."
       
       }
-      ]
+      ],
+      today:[],
+      yesterday:[],
   },
   reducers: {
     changeDrag: (state,action) => {
-        state.drag =action.payload
-      },
+      state.drag =action.payload
+    },
+    SetToday: (state,action) => {
+      state.today =action.payload
+    },
+    SetYesterday: (state,action) => {
+      state.yesterday =action.payload
+    },
     addInTodoIndex: (state,action) => {
       state.todo.splice(action.payload[0], 0, action.payload[1])
       state.lastid++
@@ -120,7 +128,7 @@ export const todoSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { changeDrag,
+export const { changeDrag,SetToday,SetYesterday,
   addInTodoIndex,addInTodo,removeInTodo,UpdateInTodo,
   addInInProcessIndex,addInProcess,removeInInProcess,UpdateInInprogress,
   addInDoneIndex,addInDone,removeInDone,UpdateInDone } = todoSlice.actions
