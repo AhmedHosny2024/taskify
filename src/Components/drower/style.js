@@ -49,6 +49,7 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
         position: "static",
         /* border-right: solid 1px red; */
         marginLeft: -5,
+        marginTop:-15
     },
     ...(open && {
       ...openedMixin(theme),
