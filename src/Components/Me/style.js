@@ -12,7 +12,7 @@ export const Container=styled(Box)(({ theme }) => ({
     //   margin:0
     },
     // height:200,
-    width:"100%",
+    width:"80%",
     display:"flex",
     alignItems:"center",
 }))

@@ -7,10 +7,19 @@ import Notifications from './notification/notifucation';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { IconButton } from '@mui/material';
 import httpClinte from '../Login/httpClinte';
+import { useDispatch } from 'react-redux';
+import { Me } from '../../Redux/drowerSlice';
+import { CancelUser } from '../../Redux/IdsSlice';
 
 
 
 export default function MenuAppBar() {
+  const dispatch=useDispatch()
+  const selectMe= () => {
+    // Home(dispatch)
+    dispatch(Me())
+    dispatch(CancelUser())
+  };
 
   const logout = async ()=>{
     const res= await httpClinte.post("//localhost:5000/logout")
@@ -35,12 +44,15 @@ export default function MenuAppBar() {
                     {/* <NotificationsNoneIcon  color='primary'/> */}
                 </Icon>
                 <UserData>
+                {/* on click user info  */}
+                  <UserData onClick={selectMe} sx={{cursor:"pointer"}}> 
                     <Icon>
                         <AccountCircle color='primary' />
                     </Icon>
                     <Name>
                       Hosny
                     </Name>
+                    </UserData>
                   <IconButton onClick={logout}>
                     <LogoutOutlinedIcon color='primary'/>
                   </IconButton>

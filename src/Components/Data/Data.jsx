@@ -48,7 +48,6 @@ export default function Data () {
       setDone(fetchedData.map((a) => a.done).flat())
       setmainDone(fetchedData.map((a) => a.done).flat())
       let x=[(fetchedData.map((a) => a.todo)).flat(),(fetchedData.map((a) => a.inprogress)).flat()].flat()
-      console.log(x)
       dispatch(SetToday(Today(x)))
       dispatch(SetYesterday(Yesterday(x)))
       setToDoLoading(false);
@@ -98,7 +97,6 @@ useEffect(()=>{
     setDone(mainDone)
   }
   if(searchState){
-    console.log("start")
     setTodo(searchByVal(todo,searchval))
     setInprogress(searchByVal(inprogress,searchval))
     setDone(searchByVal(done,searchval))

@@ -7,9 +7,10 @@ import Drower from '../buttomDrower/buttomDrower';
 import Users from '../Users/Users';
 import Time from '../Attendance/attendance';
 import { useSelector } from 'react-redux';
+import Me from '../Me/Me';
 
 function Taskify() {
-const [main,time,users]= useSelector(state=>state.drower.selected)
+const [main,time,users,me]= useSelector(state=>state.drower.selected)
   return (
     <div className="App">
       <Nav/>
@@ -17,7 +18,7 @@ const [main,time,users]= useSelector(state=>state.drower.selected)
         <MiniDrawer/>
         { (main && <Main/> ) ||
         (time && <Time/>  )
-        ||( users && <Users/>) }
+        ||( users && <Users/>) ||( me && <Me/>)}
       </Container>
         <Drower/>
     </div>

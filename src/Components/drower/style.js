@@ -15,15 +15,15 @@ const closedMixin = (theme) => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-    margin:0
+    // margin:0
   }),
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 10px)`,
-  margin:0,
+  // margin:0,
 
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 10px)`,
-    margin:0,
+    // margin:0,
   },
 });
 
@@ -48,8 +48,8 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
         // zIndex:1,
         position: "static",
         /* border-right: solid 1px red; */
-        marginLeft: -5,
-        marginTop:-15
+        // marginLeft: -5,
+        // marginTop:-15
     },
     ...(open && {
       ...openedMixin(theme),
@@ -77,7 +77,7 @@ export const ItemIcone = styled(ListItemIcon)((open) => ({
     mr: open ? 3 : 3,
     justifyContent: 'center',
     paddingLeft:7,
-    // marginRight:15,
+    marginRight:10,
     
   }));
 export const Text = styled(ListItemText)((selected,open) => ({

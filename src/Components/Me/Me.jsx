@@ -1,21 +1,25 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
-import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
-import { Container, Image, MyBox, MyBox2, MyContainer, MySelect, WebCam } from "./style";
-import { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
+import { Container, Image, MyBox, MyBox2, MySelect, WebCam } from "./style";
+import { Box, Button, TextField } from "@mui/material";
 
 const videoConstraints = {
-//   width: 300,
-//   height: 300,
-  facingMode: 'user',
-}
-
-export default function Reg(){
-    const[name,setName]=useState('')
-    const[role,setRole]=useState('')
-    const[dep,setDep]=useState('')
-    console.log(role,dep)
-    const[job,setJob]=useState('')
-    const[phone,setPhone]=useState('')
+    //   width: 300,
+    //   height: 300,
+      facingMode: 'user',
+    }
+    const data={
+        name:"Ahmed Hosny",
+        phone:"01060668268",
+        dep:"Application",
+        role:"User",
+        job:"Computer Engineer"
+    }
+export default function Me(){
+    const[name,setName]=useState(data.name)
+    const[role,setRole]=useState(data.role)
+    const[dep,setDep]=useState(data.dep)
+    const[job,setJob]=useState(data.job)
+    const[phone,setPhone]=useState(data.phone)
     var departments=["Application","IT","IS","Markiting"]
     departments = departments.map((str) => ({ value: str, label: str }));
     var roles=["User","Admin"]
@@ -34,18 +38,15 @@ export default function Reg(){
         const pictureSrc = webcamRef.current.getScreenshot()
         setPicture(pictureSrc)
       })
-    const login=async ()=>{
-     
-            window.location.pathname = 'login'
+    const Save=async ()=>{
+     console.log(picture)
     }
-    const submit=async ()=>{
+    const Cancel=async ()=>{
      
             
     }
-    return (
-        <MyContainer>
-        <Typography variant="h2" sx={{margin:"6px auto",textAlign:"center"}}>Welcome to be one of us 😃</Typography>
-    <Container>
+    return(
+        <Container>
         <MyBox >
             <Box sx={{justifyContent:"space-evenly",flexDirection:"column",display:"flex"}}>
                 <TextField
@@ -81,29 +82,30 @@ export default function Reg(){
                 />
                 <MySelect
                     showSearch
-                    placeholder="Department"
-                    optionFilterProp="children"
-                    onChange={Role}
-                    filterOption={(input, option) =>
-                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                    }
-                    options={departments}
-                />
-                <MySelect
-                    showSearch
                     placeholder="Role"
                     optionFilterProp="children"
-                    onChange={Dep}
+                    onChange={Role}
+                    value={role}
                     filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                     }
                     options={roles}
                 />
+                <MySelect
+                    value={dep}
+                    showSearch
+                    placeholder="Department"
+                    optionFilterProp="children"
+                    onChange={Dep}
+                    filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={departments}
+                />
                 <Box sx={{display:"flex",flexDirection:"row",my:2,justifyContent:"space-between"}}>
-                    <Button variant="contained" onClick={login} >Submit</Button>
-                    <Button variant="contained" onClick={submit} >
-                        login
-                        <PhotoCameraOutlinedIcon sx={{p:1}}/>
+                    <Button variant="contained" onClick={Save} >Save</Button>
+                    <Button variant="contained" onClick={Cancel} >
+                        Cancel
                     </Button>
                 </Box>
             </Box>
@@ -120,7 +122,7 @@ export default function Reg(){
                     videoConstraints={videoConstraints}
                 />
                 ) : (
-                <Image src={picture} title="you look pretty today 😍" alt=""/>
+                <Image src={picture} alt=""/>
                 )}
             </Box>
             {picture !== '' ? (
@@ -148,6 +150,6 @@ export default function Reg(){
             )}
         </MyBox2>
     </Container>
-    </MyContainer>
-    )
+
+    );
 }

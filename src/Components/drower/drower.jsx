@@ -6,8 +6,9 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import { Drawer, Item, ItemIcone, Text } from './style';
 import { useDispatch, useSelector } from 'react-redux';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 // import { Setting, Home, DrawerAction } from '../../Redux/Actions/drowerActions';
-import { Home, changeDrower, Users, Attendance } from '../../Redux/drowerSlice';
+import { Home, changeDrower, Users, Attendance, Me } from '../../Redux/drowerSlice';
 import { CancelUser } from '../../Redux/IdsSlice';
 
 export default function MiniDrawer() {
@@ -24,6 +25,11 @@ export default function MiniDrawer() {
   const selectHome= () => {
     // Home(dispatch)
     dispatch(Home())
+    dispatch(CancelUser())
+  };
+  const selectMe= () => {
+    // Home(dispatch)
+    dispatch(Me())
     dispatch(CancelUser())
   };
   const selectUsers= () => {
@@ -47,6 +53,15 @@ export default function MiniDrawer() {
                  <HomeOutlinedIcon sx={{ color: selected[0] ? "#1890FF" : "black" }}/> 
                 </ItemIcone>
                 <Text primary={"Home"} sx={{ color: selected[0] ? "#1890FF" : "black",opacity: drower?1:0 }} />
+              </Item>
+            </ListItem>
+
+            <ListItem key={"Me"} disablePadding sx={{ display: 'block' }} onClick={selectMe}>
+              <Item open={drower} selected={selected[3]} data-testid="mouseEnter">
+                <ItemIcone open ={drower}>
+                 <PermIdentityOutlinedIcon sx={{ color: selected[3] ? "#1890FF" : "black" }}/> 
+                </ItemIcone>
+                <Text primary={"Me"} sx={{ color: selected[3] ? "#1890FF" : "black",opacity: drower?1:0 }} />
               </Item>
             </ListItem>
 
