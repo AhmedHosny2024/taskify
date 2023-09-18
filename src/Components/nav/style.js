@@ -12,7 +12,7 @@ export const Name = styled("p")(() => ({
   export const UserContainer = styled("div")(() => ({
     display:"flex",
     flexDirection:"row",
-    alignItems:"center"
+    alignItems:"baseline"
   }));
   export const UserData = styled("div")(() => ({
     display:"flex",

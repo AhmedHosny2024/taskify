@@ -37,3 +37,7 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-radio-group .ant-radio-button-wrapper{
+  display: none !important;
+}

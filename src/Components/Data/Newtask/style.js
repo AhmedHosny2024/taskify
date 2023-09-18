@@ -51,5 +51,7 @@ export const CancelBtn = styled(Button)(()  => ({
  }));
 
 export const MySelect = styled(Select)(() => ({
-        margin:"8px 0 0 0"
+        margin:"8px 0 0 0",
+        fontWeight:700,
+        color:"black"
   }));

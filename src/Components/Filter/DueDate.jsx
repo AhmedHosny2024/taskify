@@ -1,15 +1,14 @@
 import { CheckSquareOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Collapse } from '@mui/material';
 import React from 'react';
-import { ALLList, Icon, IconText, ItemButton, MyList, SmallIconText, SubItemButton } from './style';
+import { ALLList, Icon, IconText, ItemButton, MyList} from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { dudate, changestate, setStart, setEnd } from '../../Redux/filterSlice';
+import { changestate, setStart, setEnd } from '../../Redux/filterSlice';
 import { DatePicker } from 'antd';
 
 export default function  DueDate () {
 
     const data= useSelector(state=>state.filter.filterState)
-    const display= useSelector(state=>state.filter.dudate)
     const dispatch=useDispatch()
     const open=data[1]
     const handleClick = () => {

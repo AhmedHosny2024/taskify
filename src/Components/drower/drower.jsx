@@ -7,24 +7,30 @@ import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import { Drawer, Item, ItemIcone, Text } from './style';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Setting, Home, DrawerAction } from '../../Redux/Actions/drowerActions';
-import { Home, changeDrower,Setting, Users } from '../../Redux/drowerSlice';
+import { Home, changeDrower, Users, Attendance } from '../../Redux/drowerSlice';
+import { CancelUser } from '../../Redux/IdsSlice';
 
 export default function MiniDrawer() {
   const drower =useSelector(state=>state.drower.drower)
   const selected = useSelector(state=>state.drower.selected)
   const dispatch =useDispatch()
 
-  const selectSetting = () => {
+  const selectAttendance= () => {
     // Setting(dispatch)
-    dispatch(Setting())
+    dispatch(Attendance())
+    dispatch(CancelUser())
+
   };
   const selectHome= () => {
     // Home(dispatch)
     dispatch(Home())
+    dispatch(CancelUser())
   };
   const selectUsers= () => {
     // Home(dispatch)
     dispatch(Users())
+    dispatch(CancelUser())
+
   };
   
   const handleDrawer = () => {
@@ -44,7 +50,7 @@ export default function MiniDrawer() {
               </Item>
             </ListItem>
 
-            <ListItem key={"Attendence"} disablePadding sx={{ display: 'block' }} onClick={selectSetting}>
+            <ListItem key={"Attendence"} disablePadding sx={{ display: 'block' }} onClick={selectAttendance}>
             <Item open={drower} selected={selected[1]}>
               <ItemIcone open ={drower}>
                 <CalendarMonthOutlinedIcon sx={{ color: selected[1] ? "#1890FF" : "black" }}/>

@@ -4,7 +4,7 @@ export const drowerSlice = createSlice({
   name: 'drower',
   initialState: {
     drower: false,
-    selected:[0,0,0],
+    selected:[1,0,0],
   },
   reducers: {
     changeDrower: (state) => {
@@ -13,7 +13,7 @@ export const drowerSlice = createSlice({
     Home: (state)=>{
       state.selected=[1 , 0,0]
     },
-    Setting: (state)=>{
+    Attendance: (state)=>{
       state.selected=[0 , 1,0]
     },
     Users: (state)=>{
@@ -23,6 +23,6 @@ export const drowerSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { changeDrower, Home, Setting,Users } = drowerSlice.actions
+export const { changeDrower, Home, Attendance,Users } = drowerSlice.actions
 
 export default drowerSlice.reducer

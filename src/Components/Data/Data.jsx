@@ -56,6 +56,7 @@ export default function Data () {
 
     // Clean up the listener when the component unmounts
     return () => unsubscribe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // const dispatch=useDispatch()
@@ -103,6 +104,7 @@ useEffect(()=>{
     setDone(searchByVal(done,searchval))
   }
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[category,datefilter,start,end,searchState,searchval])
    const dragEnd=async(result)=>{ 
 

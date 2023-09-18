@@ -76,8 +76,8 @@ export default function NewTask(props) {
     <Card borderColor={borderColor} data-testid="newTask">
       <MySelect
         showSearch
-        sx={{fontWeight:700,color:"black"}}
         placeholder="Select Category"
+        
         optionFilterProp="children"
         onChange={onChange}
         // onSearch={onSearch}
