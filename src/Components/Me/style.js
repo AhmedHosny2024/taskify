@@ -27,6 +27,9 @@ export const MyBox2 = styled(Box)(({ theme }) => ({
     [theme.breakpoints.between('0', '710')]: {
      width:"75%"
     },
+    [theme.breakpoints.between('0', '600')]: {
+        marginBottom:12
+      },
     width:"60%",
 }))
 export const MySelect = styled(Select)(() => ({

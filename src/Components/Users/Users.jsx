@@ -11,7 +11,12 @@ const data=[
         id:1,
         name:"Ahmed Hosny",
         profile:'https://nationaltoday.com/wp-content/uploads/2022/04/Cristiano-Ronaldo-Birthday-1200x834.jpg.webp',
-    }
+    },
+    {
+        id:2,
+        name:"Ahmed",
+        profile:'https://media.newyorker.com/photos/64bc4330ef09d4a0e04cb249/master/w_1920,c_limit/Rosen-Messi-Miami.jpg',
+    },
 ]
 
 function Users() {

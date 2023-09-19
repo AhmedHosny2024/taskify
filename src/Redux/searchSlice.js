@@ -5,6 +5,8 @@ export const seacrhSlice = createSlice({
   initialState: {
     searchState: false,
     val:"",
+    userName:"",
+    searchUser:false,
   },
   reducers: {
     changesearch: (state,action) => {
@@ -13,10 +15,18 @@ export const seacrhSlice = createSlice({
     changeVale: (state,action)=>{
       state.val=action.payload
     },
+
+    changeUserSearch: (state,action) => {
+      state.searchUser =action.payload
+    },
+    changeUserName: (state,action)=>{
+      state.userName=action.payload
+    },
+    
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { changesearch, changeVale } = seacrhSlice.actions
+export const { changesearch, changeVale ,changeUserSearch,changeUserName} = seacrhSlice.actions
 
 export default seacrhSlice.reducer

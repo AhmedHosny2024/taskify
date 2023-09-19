@@ -6,9 +6,10 @@ export const ButtomDrower = styled(Box)(
       [theme.breakpoints.between('0', '600')]: {
         display:'block',
       },
-      width:"100%",
-      position:"absolute",
-      bottom:0,
+      zIndex: 10,
+      position: "fixed",
+      bottom: 0,
+      width: "-webkit-fill-available",
     }),
     );
     

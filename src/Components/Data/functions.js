@@ -92,7 +92,7 @@ export function checkall(a,category,start,end){
 export function searchByVal(a,val){
     let data=[]
     val=val.toLowerCase()
-    data=a.filter((ele)=>(ele.title.toLowerCase().includes(val)||ele.disc.toLowerCase().includes(val)))
+    data=a.filter((ele)=>(ele.title.toLowerCase().includes(val.trim())||ele.disc.toLowerCase().includes(val.trim())))
     return data.flat()
 }
 
