@@ -28,7 +28,7 @@ export default function Login(){
     return (
     <Container>
         <Typography variant="h2" >Smile for the picture 😁</Typography>
-        <Alert severity="error" sx={{mt:2,width:"100%"}}>More than one person in the image, Please be alone </Alert>
+        <Alert severity="error" sx={{mt:2}}>More than one person in the image, Please be alone </Alert>
             <Box>
                 <WebCam
                     audio={false}
