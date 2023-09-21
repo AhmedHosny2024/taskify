@@ -14,7 +14,7 @@ namespace taskify.Data
         public DbSet<MyTask> Tasks { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Department> Department { get; set; }
-        public DbSet<Task_Status> TaskStatus { get; set; }
+        public DbSet<Task_Status> Task_Status { get; set; }
         public DbSet<Attendance> Attendance { get; set; }
 
 
@@ -80,7 +80,7 @@ namespace taskify.Data
                    Disc = "Description for Task 1",
                    Category = "Junior",
                    Date = "2023-09-20",
-                   TaskStatusId = 1,
+                   Task_StatusId = 1,
                    UserId = 1
                },
                new MyTask
@@ -90,7 +90,7 @@ namespace taskify.Data
                    Disc = "Description for Task 2",
                    Category = "Senior",
                    Date = "2023-09-21",
-                   TaskStatusId = 2,
+                   Task_StatusId = 2,
                    UserId = 2
                },
                new MyTask
@@ -100,7 +100,7 @@ namespace taskify.Data
                    Disc = "Description for Task 3",
                    Category = "Senior",
                    Date = "2023-09-21",
-                   TaskStatusId = 3,
+                   Task_StatusId = 3,
                    UserId = 2
                }
            );

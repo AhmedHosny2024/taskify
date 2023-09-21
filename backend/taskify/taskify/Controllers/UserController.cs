@@ -19,9 +19,11 @@ namespace taskify.Controllers
 
         // get all users in deparrment
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetUsers()
+        public ActionResult<IEnumerable<User>> GetUsers(string departnment)
         {
-            return Ok(_db.Users.ToList());
+            var dep = _db.Department.FirstOrDefault(d => d.Name == departnment);
+            var user = _db.Users.Where(u => u.DepartmentId == dep.Id);
+            return Ok(User);
         }
 
         // get user data by id

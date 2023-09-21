@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.Entity;
 using taskify.Data;
 using taskify.model;
 using taskify.model.Dto;
@@ -28,7 +29,7 @@ namespace taskify.Controllers
                 Disc = t.Disc,
                 Category = t.Category,
                 Date = t.Date,
-                TaskStatusId = t.TaskStatusId,
+                Task_StatusId = t.TaskStatusId,
                 UserId = t.UserId,
             };
             if (t == null)
@@ -96,7 +97,7 @@ namespace taskify.Controllers
             updated.Title=t.Title;
             updated.Disc = t.Disc;
             updated.Category=t.Category;
-            updated.TaskStatusId = t.TaskStatusId;
+            updated.Task_StatusId = t.TaskStatusId;
             _db.Tasks.Update(updated);
             _db.SaveChanges();
             return Ok();
@@ -124,7 +125,23 @@ namespace taskify.Controllers
             {
                 return NotFound();
             }
-            var tasks = _db.Tasks.Where(t => t.UserId == id);
+
+
+            var tasks  = (
+             from task in _db.Tasks
+             join status in _db.Task_Status on task.Task_StatusId equals status.Id
+             where  (task.UserId== id) select new
+             {
+                Id=task.Id,
+                Title = task.Title,
+                Disc = task.Disc,
+                Category = task.Category,
+                Task_Status=status.Name,
+                Date=task.Date,
+                UserId=task.UserId,
+                    
+        }).ToList();
+
             return Ok(tasks);
         }
 

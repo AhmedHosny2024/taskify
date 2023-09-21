@@ -17,9 +17,9 @@ namespace taskify.model
 
         public string Date { get; set; } = null!;
 
-        public int TaskStatusId { get; set; }
+        public int Task_StatusId { get; set; }
 
-        public virtual Task_Status TaskStatus { get; set; }
+        public virtual Task_Status Task_Status { get; set; }
 
         public int UserId { get; set; }
         public virtual User User { get; set; }
