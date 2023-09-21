@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-
-namespace taskify.model.Dto
+﻿namespace taskify.model.Dto
 {
-    public class UserDto
+    public class updateUser
     {
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
 
-        public byte[] Profile { get; set; }=null!;
+        public byte[] Profile { get; set; } = null!;
 
         public byte[] Features { get; set; } = null!;
 
@@ -16,6 +13,5 @@ namespace taskify.model.Dto
 
         public int DepartmentId { get; set; }
         public string JobTitle { get; set; } = null!;
-
     }
 }

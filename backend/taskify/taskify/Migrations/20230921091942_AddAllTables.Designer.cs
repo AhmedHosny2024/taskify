@@ -11,8 +11,8 @@ using taskify.Data;
 namespace taskify.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20230920163115_AddUserTable")]
-    partial class AddUserTable
+    [Migration("20230921091942_AddAllTables")]
+    partial class AddAllTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,82 @@ namespace taskify.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("taskify.model.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attendance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = "2023-05-01",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = "2023-05-01",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = "2023-05-01",
+                            UserId = 1
+                        });
+                });
+
+            modelBuilder.Entity("taskify.model.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Department");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Name = "a"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "h"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "a h"
+                        });
+                });
 
             modelBuilder.Entity("taskify.model.MyTask", b =>
                 {
@@ -92,6 +168,41 @@ namespace taskify.Migrations
                             TaskStatusId = 2,
                             Title = "Task 2",
                             UserId = 2
+                        });
+                });
+
+            modelBuilder.Entity("taskify.model.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Name = "ahmed"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "hosny"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "ahmed hosny"
                         });
                 });
 

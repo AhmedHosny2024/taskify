@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using taskify.Data;
 using taskify.model;
 using taskify.model.Dto;
@@ -24,28 +25,22 @@ namespace taskify.Controllers
             MyTask x = new MyTask()
             {
                 Title = t.Title,
-                Disc= t.Disc,
+                Disc = t.Disc,
                 Category = t.Category,
                 Date = t.Date,
-                TaskStatusId=t.TaskStatusId,
-                UserId=t.UserId, 
+                TaskStatusId = t.TaskStatusId,
+                UserId = t.UserId,
             };
-            if (t == null )
+            if (t == null)
             {
                 return BadRequest(t);
             }
-
-            /*if (u.Id > 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
-            }*/
             _db.Tasks.Add(x);
             _db.SaveChanges();
             return Ok(x);
         }
 
-        // delete user info
+        // delete task
         [HttpDelete("delete/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -65,27 +60,59 @@ namespace taskify.Controllers
             _db.SaveChanges();
             return Ok();
         }
-        // update user info
-        [HttpPut("update")]
+        // update task
+        /*    [HttpPut("update")]
+            [ProducesResponseType(StatusCodes.Status200OK)]
+            [ProducesResponseType(StatusCodes.Status400BadRequest)]
+            public ActionResult<User> UpdateTask( [FromBody] MyTask u)
+            {
+                if (u.Id == 0 || u == null)
+                {
+                    return BadRequest();
+                }
+                _db.Tasks.Update(u);
+                _db.SaveChanges();
+                return Ok();
+            }
+        */
+
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> UpdateTask( [FromBody] MyTask u)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<MyTask> Update([FromBody] UpdatedTask t )
         {
-            if (u.Id == 0 || u == null)
+
+            if (t == null)
             {
                 return BadRequest();
             }
-            _db.Tasks.Update(u);
+            var updated = _db.Tasks.FirstOrDefault( u => (u.Id == t.Id) );
+            if (updated == null)
+            {
+                return NotFound();
+            }
+
+            updated.Title=t.Title;
+            updated.Disc = t.Disc;
+            updated.Category=t.Category;
+            updated.TaskStatusId = t.TaskStatusId;
+            _db.Tasks.Update(updated);
             _db.SaveChanges();
             return Ok();
         }
 
-        // get all tasks for user
+        /// how to call 
+        /// in the body send : 
+        /// "op":"replace",
+        /// "path":"attribute name to update ",
+        /// "value":"new val"
+        // get all tasks for user (user id send in url)
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-
+        
         public ActionResult<User> GetUserTasks(int id)
         {
             if (id == 0)

@@ -41,10 +41,23 @@ namespace taskify.Controllers
             {
                 return NotFound();
             }
-            return Ok(user);
+            var rol=_db.Roles.FirstOrDefault(u=>u.Id==user.RoleId);
+            var dep = _db.Department.FirstOrDefault(u => u.Id == user.DepartmentId);
+            var data = new
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Role = rol,
+                Department = dep,
+                JobTitle = user.JobTitle,
+                Profile = user.Profile,
+                Features = user.Features
+            };
+
+            return Ok(data);
         }
 
-        // get user in database to log in => fo to python function
+        // get user in database to log in => forward to python function
         [HttpGet("image")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,7 +77,7 @@ namespace taskify.Controllers
             return Ok(user);
         }
 
-        // get user attendance
+     /*   // get user attendance
         [HttpGet("attendance/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -82,25 +95,7 @@ namespace taskify.Controllers
             }
             return Ok(user);
         }
-
-        // get user tasks
-        [HttpGet("tasks/{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<User> GetUserTasks(int id)
-        {
-            if (id == 0)
-            {
-                return BadRequest();
-            }
-            var user = _db.Users.FirstOrDefault(u => u.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
+    */
 
         // add user 
         [HttpPost("add")]
@@ -157,47 +152,27 @@ namespace taskify.Controllers
         [HttpPut("update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> UpdateUser( [FromBody]User u)
+        public ActionResult<User> UpdateUser( [FromBody]updateUser u)
         {
             if(u.Id==0 || u==null)
             {
                 return BadRequest();
             }
-            _db.Users.Update(u);
+            var updated = _db.Users.FirstOrDefault(us => (us.Id == u.Id));
+            if (updated == null)
+            {
+                return NotFound();
+            }
+            updated.Name = u.Name;
+            updated.Profile = u.Profile;
+            updated.Features = u.Features;
+            updated.RoleId = u.RoleId;
+            updated.DepartmentId = u.DepartmentId;
+            updated.JobTitle = u.JobTitle;
+            _db.Users.Update(updated);
             _db.SaveChanges();
             return Ok();
         }
 
-
-        /// DONT NEED IT JUST FOR LEARN
-        
-        [HttpPatch("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> Patchtest(int id, JsonPatchDocument<User>patch)
-        {
-            if (id == 0 || patch == null)
-            {
-                return BadRequest();
-            }
-            var user = _db.Users.FirstOrDefault(u => u.Id == id);
-            if (user == null)
-            {
-                return BadRequest();
-            }
-            patch.ApplyTo(user, ModelState);
-            if(!ModelState.IsValid) { 
-                return BadRequest(ModelState);
-            }
-            _db.Users.Update(user);
-            _db.SaveChanges();
-            return Ok();
-        }
-        
-        /// how to call 
-        /// in the body send : 
-        /// "op":"replace",
-        /// "path":"attribute name to update ",
-        /// "value":"new val"
     }
 }
