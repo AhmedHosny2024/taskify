@@ -5,7 +5,7 @@ import Login from './Components/Login/login';
 import Reg from './Components/reg/reg';
 // import Time from './Components/Attendance/attendance';
 // import Users from './Components/Users/Users';
-import Me from './Components/Me/Me';
+// import Me from './Components/Me/Me';
 
 function App() {
   

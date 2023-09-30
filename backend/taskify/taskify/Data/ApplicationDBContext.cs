@@ -112,25 +112,28 @@ namespace taskify.Data
                     RoleId = 1,
                     DepartmentId = 1,
                     JobTitle = "software engineer",
-                    Profile = new byte[] { 0x00 },
-                    Features = new byte[] { 0x00 },
+                    /*Profile = new byte[] { 0x00 },
+                    Features = new byte[] { 0x00 },*/
+                    Image="Images/me"
                 },
-                new User
+                new User()
                 {
                     Id = 1,
                     Name = "Ali Mohamed",
-                    Profile = new byte[] { 0x01, 0x02, 0x03, 0x04 },
-                    Features = new byte[] { 0x05, 0x06, 0x07, 0x08 },
+                    /* Profile = new byte[] { 0x01, 0x02, 0x03, 0x04 },
+                     Features = new byte[] { 0x05, 0x06, 0x07, 0x08 },*/
+                    Image = "Images/ahmed",
                     RoleId = 2,
                     DepartmentId = 3,
                     JobTitle = "Frontend Developer"
                 },
-                new User
+                new User()
                 {
                     Id = 2,
                     Name = "Moaz Ahmed",
-                    Profile = new byte[] { 0x01, 0x02, 0x03, 0x04 },
-                    Features = new byte[] { 0x05, 0x06, 0x07, 0x08 },
+                    /*Profile = new byte[] { 0x01, 0x02, 0x03, 0x04 },
+                    Features = new byte[] { 0x05, 0x06, 0x07, 0x08 },*/
+                    Image = "Images/hosny",
                     RoleId = 1,
                     DepartmentId = 2,
                     JobTitle = "Backend Developer"
@@ -140,19 +143,19 @@ namespace taskify.Data
                 new Attendance
                 {
                     Id = 1,
-                    Date="2023-05-01",
+                    Date= "05/1/2023",
                     UserId = 1
                 },
                 new Attendance
                 {
                     Id = 2,
-                    Date = "2023-05-01",
+                    Date = "01/5/2023",
                     UserId = 2
                 },
                new Attendance
                {
                    Id = 3,
-                   Date = "2023-05-02",
+                   Date = "02/4/2023",
                    UserId = 1
                }
             );

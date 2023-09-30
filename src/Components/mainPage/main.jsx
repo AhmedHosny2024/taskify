@@ -6,7 +6,7 @@ import Data from '../Data/Data';
 import { SecondContainer } from './style';
 
 function Main() {
-  const filter=useSelector(state=>state.filter.filter)
+  const filter=useSelector(state=>state.filter)
 
   return (
         <Box sx={{ width: "-webkit-fill-available", display:"flex",flexDirection:"column"}}>

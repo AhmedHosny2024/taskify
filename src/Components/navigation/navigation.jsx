@@ -3,17 +3,16 @@ import { Container, SearchBar, SecondContainer, Title } from './style'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { Box, IconButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from '../../Redux/filterSlice';
-import { addnewtasktodo } from '../../Redux/newtaskSlice';
-import { changeVale, changesearch } from '../../Redux/searchSlice';
+import { addnewtasktodo, changeFilter, changeVale, changesearch} from '../../Redux/dataSlice';
+
 export default function Navigation() {
-    const filter=useSelector(state=>state.filter.filter)
+    const filter=useSelector(state=>state.filter)
     const dispatch =useDispatch()
     const onSearch = (value) => {
         dispatch(changeVale(value))
         dispatch(changesearch(true))
     };
-
+    
     return (
    <Container>
         <Title variant="h6" component="div" >

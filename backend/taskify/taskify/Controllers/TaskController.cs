@@ -21,7 +21,7 @@ namespace taskify.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> AddTask([FromBody] TaskDto t)
+        public ActionResult<MyTask> AddTask([FromBody] TaskDto t)
         {
             MyTask x = new MyTask()
             {
@@ -46,7 +46,7 @@ namespace taskify.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<User> DeleteTask(int id)
+        public ActionResult<MyTask> DeleteTask(int id)
         {
             if (id == 0)
             {
@@ -114,7 +114,7 @@ namespace taskify.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         
-        public ActionResult<User> GetUserTasks(int id)
+        public ActionResult<MyTask> GetUserTasks(int id)
         {
             if (id == 0)
             {

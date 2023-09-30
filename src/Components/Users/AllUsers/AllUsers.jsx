@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Actions, CancelBtn, Card, MyAvatar, Name, SaveBtn } from './style';
 import { useDispatch } from 'react-redux';
-import { setattendance, settasks } from '../../../Redux/IdsSlice';
 import { SearchByUser } from './functions';
 import { useSelector } from 'react-redux';
+import { setattendance, setlastId, setname, settasks } from '../../../Redux/dataSlice';
+import Users from './usersServer';
 
 
 
 function AllUsers(props) {
-    const {data}=props
+    // const {data}=props
+    const dep=useSelector(state=>state.dep)
+    const [data, error, statusCode]= Users(dep)
     const [finalData,setFinalData]=useState(data)
-    const searchState=useSelector(state=>state.search.searchUser)
-    const word=useSelector(state=>state.search.userName)
+    useEffect(()=>{
+        setFinalData(data)
+    },[data])
+    const searchState=useSelector(state=>state.searchUser)
+    const word=useSelector(state=>state.userName)
     
     useEffect(()=>{
         if(searchState){
@@ -24,16 +30,20 @@ function AllUsers(props) {
   const disatch=useDispatch()
   return (
     <>
-    {finalData.map((user)=>(
+    {finalData?.map((user)=>(
     <Card>
-        <MyAvatar src={user.profile}/>
+        <MyAvatar src={user.image}/>
         <Name>{user.name}</Name>
         <Actions>
         <SaveBtn border="#1677ff"onClick={() => {
-            disatch(settasks(data.id))
+            disatch(setname(user.name))
+            disatch(setlastId(user.id))
+            disatch(settasks(user.id))
         }}>Tasks</SaveBtn>
         <CancelBtn backgroundColor="#ff4d4f" onClick={() => {
-            disatch(setattendance(data.id))
+            disatch(setname(user.name))
+            disatch(setlastId(user.id))
+            disatch(setattendance(user.id))
         }}>
             Attendance</CancelBtn>
         </Actions>

@@ -7,33 +7,38 @@ import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import { Drawer, Item, ItemIcone, Text } from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import { Attendance, CancelUser, Home, Me, Users, changeDrower, setlastId } from '../../Redux/dataSlice';
 // import { Setting, Home, DrawerAction } from '../../Redux/Actions/drowerActions';
-import { Home, changeDrower, Users, Attendance, Me } from '../../Redux/drowerSlice';
-import { CancelUser } from '../../Redux/IdsSlice';
 
 export default function MiniDrawer() {
-  const drower =useSelector(state=>state.drower.drower)
-  const selected = useSelector(state=>state.drower.selected)
+  const drower =useSelector(state=>state.drower)
+  const selected = useSelector(state=>state.selected)
+  const Id=useSelector(state=>state.MyId)
+  const role=useSelector(state=>state.role)
   const dispatch =useDispatch()
 
   const selectAttendance= () => {
     // Setting(dispatch)
+    dispatch(setlastId(Id))
     dispatch(Attendance())
     dispatch(CancelUser())
 
   };
   const selectHome= () => {
     // Home(dispatch)
+    dispatch(setlastId(Id))
     dispatch(Home())
     dispatch(CancelUser())
   };
   const selectMe= () => {
     // Home(dispatch)
+    dispatch(setlastId(Id))
     dispatch(Me())
     dispatch(CancelUser())
   };
   const selectUsers= () => {
     // Home(dispatch)
+    dispatch(setlastId(Id))
     dispatch(Users())
     dispatch(CancelUser())
 
@@ -73,14 +78,14 @@ export default function MiniDrawer() {
               <Text primary={"Attendance"} sx={{ color: selected[1] ? "#1890FF" : "black",opacity: drower?1:0 }}/>
             </Item>
           </ListItem>
-            <ListItem key={"Users"} disablePadding sx={{ display: 'block' }} onClick={selectUsers}>
+          {role==="Admin" && <ListItem key={"Users"} disablePadding sx={{ display: 'block' }} onClick={selectUsers}>
             <Item open={drower} selected={selected[2]}>
               <ItemIcone open ={drower}>
                 <GroupsOutlinedIcon sx={{ color: selected[2] ? "#1890FF" : "black" }}/>
               </ItemIcone>
               <Text primary={"Users"} sx={{ color: selected[2] ? "#1890FF" : "black",opacity: drower?1:0 }}/>
             </Item>
-          </ListItem>
+          </ListItem>}
 
         </List>
       </Drawer>

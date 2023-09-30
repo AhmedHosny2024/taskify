@@ -22,7 +22,7 @@ export const SelectBox = styled(List)(() => ({
   top:0,
   right:18,
   width: '-webkit-fill-available',
-  maxWidth: "250px",
+  maxWidth: "350px",
   bgcolor: 'background.paper',
   overflow: 'auto',
   '& ul': { padding: 0 },

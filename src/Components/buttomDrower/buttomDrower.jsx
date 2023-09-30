@@ -8,8 +8,7 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 
 import { ButtomDrower } from './style';
 import { useDispatch } from 'react-redux';
-import { Attendance, Home, Me, Users } from '../../Redux/drowerSlice';
-import { CancelUser } from '../../Redux/IdsSlice';
+import { Attendance, CancelUser, Home, Me, Users } from '../../Redux/dataSlice';
 
 export default function Drower() {
   const [value, setValue] = React.useState('recents');

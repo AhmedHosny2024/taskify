@@ -46,19 +46,19 @@ namespace taskify.Migrations
                         new
                         {
                             Id = 1,
-                            Date = "2023-05-01",
+                            Date = "05/1/2023",
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = "2023-05-01",
+                            Date = "01/5/2023",
                             UserId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = "2023-05-02",
+                            Date = "02/4/2023",
                             UserId = 1
                         });
                 });
@@ -247,9 +247,9 @@ namespace taskify.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Features")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobTitle")
                         .IsRequired()
@@ -258,10 +258,6 @@ namespace taskify.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Profile")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -279,30 +275,27 @@ namespace taskify.Migrations
                         {
                             Id = 3,
                             DepartmentId = 1,
-                            Features = new byte[] { 0 },
+                            Image = "Images/me",
                             JobTitle = "software engineer",
                             Name = "Ahmed Hosny",
-                            Profile = new byte[] { 0 },
                             RoleId = 1
                         },
                         new
                         {
                             Id = 1,
                             DepartmentId = 3,
-                            Features = new byte[] { 5, 6, 7, 8 },
+                            Image = "Images/ahmed",
                             JobTitle = "Frontend Developer",
                             Name = "Ali Mohamed",
-                            Profile = new byte[] { 1, 2, 3, 4 },
                             RoleId = 2
                         },
                         new
                         {
                             Id = 2,
                             DepartmentId = 2,
-                            Features = new byte[] { 5, 6, 7, 8 },
+                            Image = "Images/hosny",
                             JobTitle = "Backend Developer",
                             Name = "Moaz Ahmed",
-                            Profile = new byte[] { 1, 2, 3, 4 },
                             RoleId = 1
                         });
                 });

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import Me from '../Me/Me';
 
 function Taskify() {
-const [main,time,users,me]= useSelector(state=>state.drower.selected)
+const [main,time,users,me]= useSelector(state=>state.selected)
   return (
     <div className="App">
       <Nav/>

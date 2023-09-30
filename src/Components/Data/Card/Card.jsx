@@ -8,7 +8,7 @@ import Display from '../dispay/display';
 export default function TodoCard (props) {
     const {data,borderColor,index,func,remove}=props
     return (
-    <Draggable key={data.id} draggableId={data.id} index={index} >
+    <Draggable key={data?.id.toString()} draggableId={data?.id.toString()} index={index} >
         {(draggablePprovided,draggableSnapshot)=>(
         <Card borderColor={borderColor} 
             ref={draggablePprovided.innerRef} 
@@ -18,7 +18,7 @@ export default function TodoCard (props) {
                 
                 ...draggablePprovided.draggableProps.style
             }}
-            data-testid={data.id}
+            data-testid={data?.id}
             >
         <Header>
             <Category>

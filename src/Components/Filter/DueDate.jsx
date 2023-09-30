@@ -3,12 +3,12 @@ import { Collapse } from '@mui/material';
 import React from 'react';
 import { ALLList, Icon, IconText, ItemButton, MyList} from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { changestate, setStart, setEnd } from '../../Redux/filterSlice';
 import { DatePicker } from 'antd';
+import { changestate, setEnd, setStart } from '../../Redux/dataSlice';
 
 export default function  DueDate () {
 
-    const data= useSelector(state=>state.filter.filterState)
+    const data= useSelector(state=>state.filterState)
     const dispatch=useDispatch()
     const open=data[1]
     const handleClick = () => {

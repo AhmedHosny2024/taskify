@@ -6,8 +6,10 @@ import {
   Select, SelectBox, SelectItem, SelectItemDelete,
 } from './style';
 // import { useDispatch } from 'react-redux';
-import { removeArrayElement } from '../../../../Firebase/firebase';
+// import { removeArrayElement } from '../../../../Firebase/firebase';
 import { msg } from '../../../Snakbar';
+import axios from "../../../../Server";
+
 /**
  * More icon
  * @component
@@ -44,7 +46,16 @@ export default function More(props) {
   const handleClickAway1 = () => {
     setShowList1(false);
   };
-  
+  const deleteData = async (id) => {
+    try {
+       const response = await axios.delete(`api/Task/delete/${id}`);
+       window.location.reload();
+
+    } catch (error) {
+       console.error(error);
+    }
+    
+ };
   return (
     <>
       <Select>
@@ -57,7 +68,7 @@ export default function More(props) {
       {showList1 && (
       <SelectBox data-testid="items" >
         <SelectItem onClick={()=>document.getElementById("edit"+id)?.click()}>Edit</SelectItem>
-        <SelectItemDelete onClick={()=>{msg("success","Task deleted");removeArrayElement(field,data)}}> Delete </SelectItemDelete>
+        <SelectItemDelete onClick={()=>{msg("success","Task deleted");deleteData(data.id)}}> Delete </SelectItemDelete>
       </SelectBox>
       )}
     </>

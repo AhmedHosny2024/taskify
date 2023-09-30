@@ -86,3 +86,4 @@ C:\Users\engah\Downloads\Internship\Exceed\taskify\backend\taskify\taskify\bin\D
 C:\Users\engah\Downloads\Internship\Exceed\taskify\backend\taskify\taskify\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\engah\Downloads\Internship\Exceed\taskify\backend\taskify\taskify\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\engah\Downloads\Internship\Exceed\taskify\backend\taskify\taskify\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\engah\Downloads\Internship\Exceed\taskify\backend\taskify\taskify\bin\Debug\net7.0\taskify.staticwebassets.runtime.json

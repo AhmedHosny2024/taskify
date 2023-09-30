@@ -1,13 +1,13 @@
 import { Typography, styled } from "@mui/material";
 
 export const SecondContainer = styled(Typography)(() => ({
-    flexGrow:1,
+    // flexGrow:1,
     display:"flex",
     alignItems:"center",
     justifyContent:"center",
     marginBottom:10,
-    flexWrap:"wrap"
-    
+    flexWrap:"wrap",
+    // marginTop:-383
     }));
     export const Title = styled(Typography)(() => ({
         flexGrow:1,

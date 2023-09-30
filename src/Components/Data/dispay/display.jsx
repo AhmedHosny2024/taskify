@@ -1,13 +1,13 @@
 import {React, useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Button } from 'antd';
 import { Box, IconButton, TextField } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import { MyModal } from './style';
 function Display(props) {
-  const {data,display}=props
+  const {data}=props
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = async() => {
    await setIsModalOpen(true);
-    console.log("model")
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -15,10 +15,10 @@ function Display(props) {
 
   return (
     <>
-      <IconButton sx={{padding:1,display:{display}}} id={"show"+data.id} onClick={showModal}>
+      <IconButton sx={{padding:1}} id={"show"+data?.id} onClick={showModal}>
               <VisibilityOutlinedIcon type="primary"   />
       </IconButton>
-      <Modal title={data.title} open={isModalOpen} onOk={handleOk} onCancel={handleOk}
+      <MyModal title={data.title} open={isModalOpen} onOk={handleOk} onCancel={handleOk}
       footer={[
         <Button key="submit" type="primary" onClick={handleOk}>
           OK
@@ -63,7 +63,7 @@ function Display(props) {
           disabled
         />
         </Box>
-      </Modal>
+      </MyModal>
     </>
   );
 };

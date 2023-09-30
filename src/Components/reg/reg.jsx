@@ -1,7 +1,10 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
 import { Container, Image, MyBox, MyBox2, MyContainer, MySelect, WebCam } from "./style";
 import { useCallback, useRef, useState } from "react";
+import useReg from "./regServer";
+import { SetMyId, setlastId, stmyname } from "../../Redux/dataSlice";
+import { useDispatch } from "react-redux";
 
 const videoConstraints = {
 //   width: 300,
@@ -10,16 +13,16 @@ const videoConstraints = {
 }
 
 export default function Reg(){
+    const[data,setdata]=useState()
     const[name,setName]=useState('')
-    const[role,setRole]=useState('')
-    const[dep,setDep]=useState('')
-    console.log(role,dep)
-    const[job,setJob]=useState('')
-    const[phone,setPhone]=useState('')
+    const[roleId,setRole]=useState('')
+    const[departmentId,setDep]=useState('')
+    const[jobTitle,setJob]=useState('')
+    // const[phone,setPhone]=useState('')
     var departments=["Application","IT","IS","Markiting"]
-    departments = departments.map((str) => ({ value: str, label: str }));
+    departments = departments.map((str,index) => ({ value: index+1, label: str }));
     var roles=["User","Admin"]
-    roles = roles.map((str) => ({ value: str, label: str }));
+    roles = roles.map((str,index) => ({ value: index+1, label: str }));
     const Dep = (value) => {
         setDep(value)
       };
@@ -27,6 +30,7 @@ export default function Reg(){
         setRole(value)
     };
 
+    const dispatch=useDispatch()
     const webcamRef = useRef(null)
     const [picture, setPicture] = useState('')
 
@@ -38,13 +42,31 @@ export default function Reg(){
      
             window.location.pathname = 'login'
     }
+    const [error , data2, statusCode]= useReg(data?.name,data?.image,data?.roleId,data?.departmentId,data?.jobTitle)
     const submit=async ()=>{
-     
-            
+            const x={
+                "name":name,
+                "image":picture.split(",")[1],
+                "roleId":roleId,
+                "departmentId":departmentId,
+                "jobTitle":jobTitle
+            }
+            setdata(x)
+            if(error!==null){
+                setPicture("")
+            }
+            if(statusCode===200){
+                await dispatch(SetMyId(data2?.id))
+                await dispatch(setlastId(data2?.id))
+                await dispatch(stmyname(data2?.name))
+                window.location.pathname = `/`;
+                console.log("ok")
+            }
     }
     return (
         <MyContainer>
         <Typography variant="h2" sx={{margin:"6px auto",textAlign:"center"}}>Welcome to be one of us 😃</Typography>
+        
     <Container>
         <MyBox >
             <Box sx={{justifyContent:"space-evenly",flexDirection:"column",display:"flex"}}>
@@ -65,10 +87,10 @@ export default function Reg(){
                 type="text"
                 variant="standard"
                 onChange={(e) => setJob(e.target.value)}
-                value={job}
+                value={jobTitle}
                 sx={{mb:1}}
                 />
-                <TextField
+                {/* <TextField
                 required
                 id="standard-search"
                 label="Phone"
@@ -78,12 +100,12 @@ export default function Reg(){
                 value={phone}
                 inputProps={{ maxLength: 11,minLength:11 }}
                 sx={{mb:1}}
-                />
+                /> */}
                 <MySelect
                     showSearch
                     placeholder="Department"
                     optionFilterProp="children"
-                    onChange={Role}
+                    onChange={Dep}
                     filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                     }
@@ -93,15 +115,15 @@ export default function Reg(){
                     showSearch
                     placeholder="Role"
                     optionFilterProp="children"
-                    onChange={Dep}
+                    onChange={Role}
                     filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                     }
                     options={roles}
                 />
                 <Box sx={{display:"flex",flexDirection:"row",my:2,justifyContent:"space-between"}}>
-                    <Button variant="contained" onClick={login} >Submit</Button>
-                    <Button variant="contained" onClick={submit} >
+                    <Button variant="contained" onClick={submit} >Submit</Button>
+                    <Button variant="contained" onClick={login} >
                         login
                         <PhotoCameraOutlinedIcon sx={{p:1}}/>
                     </Button>
@@ -109,6 +131,9 @@ export default function Reg(){
             </Box>
         </MyBox>
         <MyBox2 >
+                {statusCode===401 &&<Alert severity="error" sx={{mt:2,justifyContent:"center"}}>Try to be clear in image we can't find you </Alert>}
+                {statusCode===402&&<Alert severity="error" sx={{mt:2,justifyContent:"center"}}>There are more than one person in the camera, please be alone to enter </Alert>}
+                {statusCode===403&&<Alert severity="error" sx={{mt:2,justifyContent:"center"}}>You already have account</Alert>}
             <Box>
                 {picture === '' ? (
                 <WebCam

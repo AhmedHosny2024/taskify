@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
-import { MySelect } from './style';
+import { Button } from 'antd';
+import { MyModal, MySelect } from './style';
 import { Box, TextField } from '@mui/material';
-import { updateArrayElement } from '../../../Firebase/firebase';
+// import { updateArrayElement } from '../../../Firebase/firebase';
 import { msg } from '../../Snakbar';
+import axios from "../../../Server";
+
 function Edit(props) {
     const {data,borderColor}=props
-    const [disc, setDisc] = React.useState(data.disc);
-    const [title, setTitle] = React.useState(data.title);
-    const [category, setCategory] = React.useState(data.category);
-    const id=data.id
-    const date=data.date
+    const [disc, setDisc] = React.useState(data?.disc);
+    const [title, setTitle] = React.useState(data?.title);
+    const [category, setCategory] = React.useState(data?.category);
+    const id=data?.id
+    const date=data?.date
     // const dispatch=useDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,34 +20,48 @@ function Edit(props) {
     
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    const newData={
-      id,
-      category,
-      title,
-      disc,
-      date
-    }
-    let field;
+  const handleOk = async() => {
+    // const newData={
+    //   id,
+    //   category,
+    //   title,
+    //   disc,
+    //   date
+    // }
+    let taskStatusId;
     switch(borderColor){
       case "red":
-        field="todo"
+        taskStatusId=1
         break
       case "yellow":
-        field="inprogress"
+        taskStatusId=2
         break
       case "green":
-        field="done"
+        taskStatusId=3
         break
       default:
-        field="todo"
+        taskStatusId=1
     }
 
     if(title===''){msg("error","Please add title")}
     else if(date===''){msg("error","Please select date")}
     else{
-    updateArrayElement (field,data,newData) 
-    msg("success","Task edited")
+      
+    // updateArrayElement (field,data,newData) 
+    const res = await axios.put(`/api/Task`, {
+      id,
+      title,
+      disc,
+      category,
+      taskStatusId
+    });
+    console.log(id,
+      title,
+      disc,
+      category,
+      taskStatusId)
+      window.location.reload()
+      msg("success","Task edited")
     setIsModalOpen(false);
     }
   };
@@ -57,10 +73,10 @@ function Edit(props) {
   };
   return (
     <>
-      <Button type="primary" onClick={showModal} id={"edit"+data.id} style={{display:"none" }}>
+      <Button type="primary" onClick={showModal} id={"edit"+data?.id} style={{display:"none" }}>
         
       </Button>
-      <Modal title={data.title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <MyModal title={data?.title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <Box
           noValidate
           component="form"
@@ -122,11 +138,11 @@ function Edit(props) {
           inputProps={{
             maxlength: 200
           }}
-          helperText={`${disc.length}/200`}
+          helperText={`${disc?.length}/200`}
 
         />
         </Box>
-      </Modal>
+      </MyModal>
     </>
   );
 };

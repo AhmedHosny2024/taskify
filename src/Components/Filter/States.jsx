@@ -7,8 +7,8 @@ import { changestate, staues } from '../../Redux/filterSlice';
 
 export default function  Priority () {
 
-    const data= useSelector(state=>state.filter.filterState)
-    const display= useSelector(state=>state.filter.staues)
+    const data= useSelector(state=>state.filterState)
+    const display= useSelector(state=>state.staues)
 
     const dispatch=useDispatch()
     const open=data[2]

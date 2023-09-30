@@ -1,8 +1,7 @@
 import { Container, SearchBar, SecondContainer, Title } from './style'
 import { Box } from '@mui/material';
-import { CancelUser } from '../../../Redux/IdsSlice';
 import { useDispatch } from 'react-redux';
-import { changeUserName, changeUserSearch } from '../../../Redux/searchSlice';
+import { CancelUser, changeUserName, changeUserSearch } from '../../../Redux/dataSlice';
 export default function Header() {
     const dispatch=useDispatch()
     const onSearch = (value) => {

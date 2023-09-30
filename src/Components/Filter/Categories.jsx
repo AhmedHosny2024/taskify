@@ -3,12 +3,12 @@ import { Collapse } from '@mui/material';
 import React from 'react';
 import { ALLList, Icon, IconText, ItemButton, MyList, SmallIconText, SubItemButton } from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { category, changestate } from '../../Redux/filterSlice';
+import { category, changestate } from '../../Redux/dataSlice';
 
 export default function  Categories () {
 
-    const data= useSelector(state=>state.filter.filterState)
-    const display= useSelector(state=>state.filter.category)
+    const data= useSelector(state=>state.filterState)
+    const display= useSelector(state=>state.category)
 
     const dispatch=useDispatch()
     const open=data[0]

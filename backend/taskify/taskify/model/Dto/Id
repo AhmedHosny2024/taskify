@@ -1,0 +1,7 @@
+﻿namespace taskify.model.Dto
+{
+    public class Id
+    {
+        public int id { get; set; }
+    }
+}

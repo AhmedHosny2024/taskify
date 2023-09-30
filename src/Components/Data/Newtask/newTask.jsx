@@ -3,12 +3,14 @@ import Box from '@mui/material/Box';
 import { TextField } from '@mui/material';
 import { Actions, Card, MySelect,SaveBtn,CancelBtn } from './style';
 import { useDispatch } from 'react-redux';
-import { closeall } from '../../../Redux/newtaskSlice';
 import { DatePicker } from 'antd';
-import {addToArray} from "../../../Firebase/firebase"
+// import {addToArray} from "../../../Firebase/firebase"
 import moment from 'moment';
 import { msg } from '../../Snakbar';
-const { v4: uuidv4 } = require('uuid');
+import { closeall } from '../../../Redux/dataSlice';
+import AddTask from '../AddTask';
+import { useSelector } from 'react-redux';
+// const { v4: uuidv4 } = require('uuid');
 
 export default function NewTask(props) {
   moment.locale('en')
@@ -18,43 +20,40 @@ export default function NewTask(props) {
   const [category, setCategory] = React.useState('');
   const [date, setDate] = React.useState('');
 // const [snak,setSnak]=react.useState(false)
-  // const id=useSelector(state=>state.todo.lastid)
+  const userId=useSelector(state=>state.lastid)
   const dispatch=useDispatch()
-
   const Cancel = () => {
     setCategory('')
     setDisc('')
     setTitle('')
     dispatch(closeall())
   };
-  let field;
-  const id= uuidv4()
+  let taskStatusId;
+  // const id= uuidv4()
   const Save = async () => {
     switch(type){
       case "0":
-        field="todo"
+        taskStatusId=1
         break
       case "1":
-        field="inprogress"
+        taskStatusId=2
         break
       case "2":
-        field="done"
+        taskStatusId=3
         break
       default:
-        field="todo"
+        taskStatusId=1
     }
-    const newValue={
-      id,
-      category,
-      title,
-      disc,
-      date
-    }
-    if(category!=='' && title!==''&&date !=='')
+    
+      
+    
+    if(category!=='' && title!==''&&date !==''&&disc!=="")
     {
-      msg("success","Task added successfuly")
-      addToArray(field,newValue)
+      // addToArray(field,newValue)
+      const status = await AddTask(title,disc,category,date,taskStatusId,userId)
       Cancel()
+      window.location.reload()
+      msg("success","Task added successfuly")
     }
     else{
       if(category===''){msg("error","Please select Category")}

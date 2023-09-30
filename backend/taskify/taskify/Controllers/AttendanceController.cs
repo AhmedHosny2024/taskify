@@ -35,7 +35,8 @@ namespace taskify.Controllers
             return Ok(attendance);
         }
 
-        // add attendance 
+        // auto add when log in
+       /* // add attendance 
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,6 +62,6 @@ namespace taskify.Controllers
                 return Ok();
 
         }
-
+        */
     }
 }

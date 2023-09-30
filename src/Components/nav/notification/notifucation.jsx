@@ -7,8 +7,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 
 export default function Notifications(){
-    const today=useSelector(state=>state.todo.today)
-    const missed=useSelector(state=>state.todo.yesterday)
+    const today=useSelector(state=>state.today)
+    const missed=useSelector(state=>state.yesterday)
 
     const handleClick1 = () => {
       setShowList1((prev) => !prev);
